@@ -1,0 +1,41 @@
+{% extends 'Olympus/plantillaProducto.html' %}
+{% load static %}
+  
+
+  {% block cabecera %}
+  <title>Olympus</title>
+  {% endblock cabecera %}
+
+      {% block detalleProducto %}
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mt-3 mb-3">
+          <img src="{% static 'core/img/Chaqueta.png' %}" class="img-thumbnail" alt="...">
+        </div>
+        <div class="col-md-6 col-sm-12 mt-3 mb-3">
+          <div class="row row px-3">
+            <h3>
+              Chaqueta KNOX
+            </h3>
+            <p style="color: rgb(0, 100, 255); font-size: 120%;">
+              $50.000
+            </p>
+            <h5>
+              Descripcion
+            </h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quibusdam, officiis eum sit, velit dolore
+              voluptas, quae soluta totam itaque cum tenetur id libero dolorem consequatur culpa impedit beatae quia.
+            </p>
+            <h5>
+              Disponibilidad: 8
+            </h5>
+            <b>Seleccionar Cantidad</b>
+            <div class="form-outline">
+              <input id="form1" min="1" name="Cantidad" value="1" type="number" class="form-control mb-3" />
+            </div>
+            <a href="" class="btn btn-primary">Agregar al Carro</a>
+          </div>
+        </div>
+      </div>
+      {% endblock detalleProducto %}
+    

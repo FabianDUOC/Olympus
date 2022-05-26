@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympus</title>
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <script src="https://kit.fontawesome.com/35863c2e47.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'core/img/logo.png' %}">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <!--
+    ======================================================================================================= -->
+    <!-- ENCABEZADO -->
+    <!--
+    ======================================================================================================= -->
+    <header class="container-fluid bg-black text-light
+    d-flex justify-content-center">
+        <p class="text-light mb-0 p-2 fs-6">Despacho sobre $30.000 </p>
+    </header>
+
+
+    <!--
+    ======================================================================================================= -->
+    <!-- BARRA NAVEGADORA -->
+    <!--
+    ======================================================================================================= -->
+
+    <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  border-bottom p-2 " id="menu">
+            <div class="container-fluid">
+                <img src="{% static 'core/img/logo.png' %}" alt="logo de la pagina" width="80">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div id="MenuNavegacion" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/IndexAd.html">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/AgregarProducto.html">AGREGAR</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            ROPA
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/PolerasAd.html">Poleras</a></li>
+                            <li><a class="dropdown-item" href="/PantalonesAd.html">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="/ZapatillasAd.html">Zapatillas</a></li>
+                            <li><a class="dropdown-item" href="/PoleronesAd.html">Polerones</a></li>
+                            <li><a class="dropdown-item" href="/ChaquetasAd.html">Chaquetas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/MensajeAdmin.html">MENSAJES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CuentaAdmin.html">CUENTA</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-nowrap" href="/index.html">CERRAR SESIÓN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!--AGREGAR PRODUCTO-->
+    <!--
+    ======================================================================================================= -->
+
+    <div class="container">
+        <form action="{% url 'registrarP' %}" method="POST" id="agregarP">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 col-sm-12 mt-3 mb-3">
+                    <div class="ratio ratio-1x1">
+                        <img src="{% static 'core/img/producto.png' %}" id="foto" alt="...">
+                      </div>
+                      <input type="file" name="imagen" id="fotoInput" accept=".jpg,.png" required/>
+                    </div>
+                <div class="col-md-6 col-sm-12 mt-3 mb-3">
+                    <div class="row px-3">
+                        <label for="nombreProducto">
+                            Nombre del Producto
+                        </label>
+                        <input type="text" class="form-control mt-1 mb-2" name="nombreProducto" id="nombreProducto"
+                            placeholder="Ingresar Nombre del Producto" required>
+                        <p class="msjAlerta" id="msjNombre"></p>
+                        <label for="precioP">
+                            Precio del Producto
+                        </label>
+                        <input id="precioP" min="0" name="precioP" value="0" type="number"
+                            class="form-control mt-1 mb-2" placeholder="Ingrese Precio del Producto" required />
+                        <p class="msjAlerta" id="msjPrecio"></p>
+                        <label for="descripcionCorta">
+                            Descripción Corta
+                        </label>
+                        <input type="text" class="form-control mt-1 mb-2" name="descripcionCorta" id="descripcionCorta"
+                            placeholder="Ingresar Descripción Corta" required>
+                        <p class="msjAlerta" id="msjCorta"></p>
+                        <label for="descripcionDetallada">
+                            Descripción Detallada
+                        </label>
+                        <textarea type="text" class="form-control mt-1 mb-2" name="descripcionDetallada"
+                            id="descripcionDetallada" placeholder="Ingresar Descripción Detallada" required></textarea>
+                        <p class="msjAlerta" id="msjDetallada"></p>
+                        <label for="cantidad">Seleccionar Cantidad Disponible</label>
+                        <input id="cantidad" min="0" name="cantidad" value="0" type="number"
+                            class="form-control mt-1 mb-2" placeholder="Seleccionar Disponibilidad" required />
+                        <p class="msjAlerta" id="msjCantidad"></p>
+                        <label for="categoria">Seleccionar Categoría</label>
+
+                        
+                        <select class="form-select" id="categoria" name="categoria" required>
+                            <option selected>Categoría</option>
+                            {% for c in categoria_p %}
+                            <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
+                            {% endfor %}
+                            <!--<option value="1">Polera</option>
+                            <option value="2">Pantalones</option>
+                            <option value="3">Zapatillas</option>
+                            <option value="4">Polerones</option>
+                            <option value="5">Chaquetas</option>
+                                -->
+                        </select>
+
+                        <p class="msjAlerta" id="msjCategorias"></p>
+                        <p class="msjAlerta" id="msj"></p>
+
+                        <button type="submit" href="" class="btn btn-primary px-3 mt-3">Agregar Producto</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-4">
+            <!-- Section: Redes Sociales -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://es-la.facebook.com/" target="_blank"
+                    role="button"><i class="fab fa-facebook-f"></i></a>
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/?lang=es" target="_blank"
+                    role="button"><i class="fab fa-twitter"></i></a>
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/?hl=es-la"
+                    target="_blank" role="button"><i class="fab fa-instagram"></i></a>
+
+            </section>
+            <section class="">
+                <form action="" method="post" id="suscripcion">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-auto">
+                            <p class="pt-2">
+                                <strong>Suscríbete para recibir noticias</strong>
+                            </p>
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <!-- Email input -->
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailF" name="emailf" class="form-control"
+                                    placeholder="Correo Electrónico" required />
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <!-- boton suscribete -->
+                            <button type="submit" class="btn btn-outline-light mb-4">
+                                Suscribirme
+                            </button>
+                        </div>
+                    </div>
+                    <p class="msjAlerta" id="mensajes"></p>
+                </form>
+            </section>
+
+            <section class="mb-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+                    repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+                    eum harum corrupti dicta, aliquam sequi voluptate quas.
+                </p>
+            </section>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-white" href="https://www.youtube.com/watch?v=xb89gkuFyf8">Olympus.cl</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+
+        <script src="{% static 'core/js/validaciones.js' %}"></script>
+        <script src="{% static 'core/js/Varios.js' %}"></script>
+</body>
+
+</html>

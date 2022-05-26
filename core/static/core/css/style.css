@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+
+* {
+    margin: 0%;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+
+
+}
+
+/*==============================MENU=================================*/
+#menu li>a {
+    font-size: 18px;
+
+
+}
+
+/*========================SLIDER DE IMAGENES=================================*/
+
+.carousel-inner {
+    max-height: 39rem;
+
+}
+
+.imgsld {
+    max-width: 800px;
+    margin: auto;
+    max-height: 600px;
+}
+
+.btcolor {
+    background-color: rgba(0, 0, 0, 0.158);
+}
+
+.imgcatal {
+    max-width: 400px;
+    max-height: 400px;
+    margin: auto;
+
+}
+
+p {
+    text-align: justify;
+}
+
+#mapa {
+    height: 500px;
+    width: 100%;
+}
+
+.msjAlerta {
+    text-align: center;
+    color: red;
+}
