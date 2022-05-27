@@ -1,18 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, iniciarSesion, CambiarClave, recuperarClave, registro, CategoriaProducto, Producto, EditarCuenta, AgregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta
+from .views import index, iniciarSesion, cambiarClave, recuperarClave, registro, categoriaProducto, producto, editarCuenta, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta
 
 urlpatterns = [
     path('', index, name="index"),
     path( 'iniciarSesion', iniciarSesion, name="iniciarSesion"),
-    path( 'cambiarClave', CambiarClave, name="cambiarClave"),
+    path( 'cambiarClave', cambiarClave, name="cambiarClave"),
     path( 'recuperarClave', recuperarClave, name="recuperarClave"),
     path( 'registro', registro, name="registro"),
-    path( 'categoriaProducto', CategoriaProducto, name="categoriaProducto"),
-    path( 'producto', Producto, name="producto"),
-    path( 'editarCuenta', EditarCuenta, name="editarCuenta"),
-    path( 'agregarProducto', AgregarProducto, name="agregarProducto"),
-    path( 'registrarP', registarP, name="registarP"),
+    path( 'categoriaProducto', categoriaProducto, name="categoriaProducto"),
+    path( 'producto', producto, name="producto"),
+    path( 'editarCuenta', editarCuenta, name="editarCuenta"),
+    path( 'agregarProducto', agregarProducto, name="agregarProducto"),
+    path( 'registrarP', registrarP, name="registrarP"),
     path( 'catalogoPoleras', catalogoPoleras, name="catalogoPoleras"),
     path( 'catalogoPantalones', catalogoPantalones, name="catalogoPantalones"),
     path( 'catalogoZapatillas', catalogoZapatillas, name="catalogoZapatillas"),

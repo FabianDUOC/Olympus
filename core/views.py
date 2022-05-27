@@ -8,7 +8,7 @@ def index(request):
 def iniciarSesion(request):
     return render(request,'core/iniciarSesion.html')
 
-def CambiarClave(request):
+def cambiarClave(request):
     return render(request,'core/cambiarClave.html')
 
 def recuperarClave(request):
@@ -17,35 +17,22 @@ def recuperarClave(request):
 def registro(request):
     return render(request,'core/registro.html')
 
-def CategoriaProducto(request):
+def categoriaProducto(request):
     return render(request,'core/categoriaProducto.html')
 
-def Producto(request):
+def producto(request):
     return render(request,'core/producto.html')
 
-def EditarCuenta(request):
+def editarCuenta(request):
     return render(request,'core/editarCuenta.html')
 
-def AgregarProducto(request):
+def agregarProducto(request):
     categorias = Categoria.objects.all()
     contexto = {"categoria_p":categorias}
     return render(request,'core/agregarProducto.html',contexto)
 
 def registrarP(request):
-    chip_m = request.POST['chip']
-    nombre_m = request.POST['nombre']
-    edad_m = request.POST['edad']
-    raza_m = request.POST['raza']
-    img_foto = request.FILES['foto_m']
-    #obtener el registro completo de la raza
-    raza_c = Raza.objects.get(codigo = raza_m)
-
-    #insert
-    Mascota.objects.create(codigoChip = chip_m, nombreMascota = nombre_m, edadMascota = edad_m, foto = img_foto , raza = raza_c) 
-
-    messages.success(request,'Mascota Registrada')
-
-    return redirect('formulario')
+    return redirect('agregarProducto')
 
 def catalogoPoleras(request):
     return render(request,'core/catalogoPoleras.html')
