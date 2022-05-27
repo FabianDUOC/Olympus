@@ -410,8 +410,12 @@ $(document).ready(function () {
     // FORMULARIO MENSAJES ADMIN
     $("#formMensaje").submit(function (e) {
         e.preventDefault();
-        $("#mensajes").css({ 'color': 'blue' });
-        alert("Mensaje enviado satisfactoriamente")
+        Swal.fire({
+            icon: 'success',
+            title: 'Mensaje enviado satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
         $("#formMensaje")[0].reset();
     })
 
@@ -433,7 +437,12 @@ $(document).ready(function () {
         if (entrar) {
         }
         else {
-            alert("Suscrito correctamente");
+            Swal.fire({
+                icon: 'success',
+                title: 'Usted se ha suscrito Correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
             $("#suscripcion")[0].reset();
         }
 
