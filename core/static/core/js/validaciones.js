@@ -19,9 +19,13 @@ $(document).ready(function () {
             $("#msjCorreo").html(msj);
         }
         else {
-            $("#msjCorreo").css({ 'color': 'blue' });
-            $("#msjCorreo").html("Sesión iniciada");
-            $("#formRecupClave")[0].reset();
+            Swal.fire({
+                icon: 'success',
+                title: 'Sesión iniciada',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              $("#formRecupClave")[0].reset();
         }
 
     })
@@ -52,8 +56,12 @@ $(document).ready(function () {
             $("#mensajes").html(msj);
         }
         else {
-            $("#mensajes").css({ 'color': 'blue' });
-            $("#mensajes").html("Correo de recuperación enviado");
+            Swal.fire({
+                icon: 'success',
+                title: 'Correo de recuperación enviado',
+                showConfirmButton: false,
+                timer: 1500
+              })
             $("#formRecupClave")[0].reset();
         }
     })
@@ -89,8 +97,13 @@ $(document).ready(function () {
             $("#mensajes").html(msj);
         }
         else {
-            $("#mensajes").css({ 'color': 'blue' });
-            $("#mensajes").html("Contraseña cambiada exitósamente");
+            Swal.fire({
+                icon: 'success',
+                title: 'Contraseña cambiada exitósamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+
             $("#cambiarClave")[0].reset();
         }
     })
@@ -212,8 +225,12 @@ $(document).ready(function () {
             $("#msjClave").html(msjClaves);
         }
         else {
-            $("#msj").css({ 'color': 'blue' });
-            $("#msj").html("Cuenta creada exitosamente");
+            Swal.fire({
+                icon: 'success',
+                title: 'Cuenta creada exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
             $("#formRegistro")[0].reset();
         }
     })
@@ -280,8 +297,12 @@ $(document).ready(function () {
         if (entrar) {
         }
         else {
-            $("#msj").css({ 'color': 'blue' });
-            $("#msj").html("Se han guardado los cambios");
+            Swal.fire({
+                icon: 'success',
+                title: 'Se han guardado los cambios',
+                showConfirmButton: false,
+                timer: 1500
+              })
         }
     })
 
@@ -340,8 +361,12 @@ $(document).ready(function () {
         if (entrar) {
         }
         else {
-            $("#msj").css({ 'color': 'blue' });
-            $("#msj").html("Producto Agregado");
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto Agregado',
+                showConfirmButton: false,
+                timer: 1500
+              })
             $("#agregarP")[0].reset();
         }
     })
@@ -401,8 +426,12 @@ $(document).ready(function () {
         if (entrar) {
         }
         else {
-            $("#msj").css({ 'color': 'blue' });
-            $("#msj").html("Información de producto modificada");
+            Swal.fire({
+                icon: 'success',
+                title: 'Información de producto modificada',
+                showConfirmButton: false,
+                timer: 1500
+              })
         }
     })
 
@@ -421,7 +450,7 @@ $(document).ready(function () {
 
     // FORMULARIO FOOTER
     $("#suscripcion").submit(function(e){
-        e.preventDefault();
+        
 
         var correo = $("#emailF").val();
 
