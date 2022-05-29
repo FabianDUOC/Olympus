@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <script src="https://kit.fontawesome.com/35863c2e47.js" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'core/img/logo.png' %}">
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -22,76 +22,80 @@
     <!--AGREGAR PRODUCTO-->
     <!--
     ======================================================================================================= -->
-
+    {% if messages %}
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto Agregado',
+                showConfirmButton: false,
+                timer: 1700
+              })
+        </script>
+    {% endif %}
     <div class="container">
-        <form action="{% url 'registrarP' %}" method="POST" id="agregarP">
-            {% csrf_token %}
+        <form action="{% url 'registrarP' %}" method="POST" id="agregarP" enctype="multipart/form-data">
+        {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
-                    <div class="ratio ratio-1x1">
-                        <img src="{% static 'core/img/producto.png' %}" id="foto" alt="...">
-                      </div>
-                      <input type="file" name="imagen" id="fotoInput" accept=".jpg,.png" required/>
+                    <div class="form-group">
+                        <label for="fotoP">Foto Producto: </label>
+                        <div class="ratio ratio-1x1">
+                            <img src="{% static 'core/img/producto.png' %}" id="foto" alt="...">
+                        </div>
+                        <input type="file" name="fotoInput" id="fotoInput" accept=".jpg,.png" required />
                     </div>
-                <div class="col-md-6 col-sm-12 mt-3 mb-3">
-                    <div class="row px-3">
-                        <label for="nombreProducto">
-                            Nombre del Producto
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="nombreProducto" id="nombreProducto"
-                            placeholder="Ingresar Nombre del Producto" required>
-                        <p class="msjAlerta" id="msjNombre"></p>
-                        <label for="precioP">
-                            Precio del Producto
-                        </label>
-                        <input id="precioP" min="0" name="precioP" value="0" type="number"
-                            class="form-control mt-1 mb-2" placeholder="Ingrese Precio del Producto" required />
-                        <p class="msjAlerta" id="msjPrecio"></p>
-                        <label for="descripcionCorta">
-                            Descripción Corta
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="descripcionCorta" id="descripcionCorta"
-                            placeholder="Ingresar Descripción Corta" required>
-                        <p class="msjAlerta" id="msjCorta"></p>
-                        <label for="descripcionDetallada">
-                            Descripción Detallada
-                        </label>
-                        <textarea type="text" class="form-control mt-1 mb-2" name="descripcionDetallada"
-                            id="descripcionDetallada" placeholder="Ingresar Descripción Detallada" required></textarea>
-                        <p class="msjAlerta" id="msjDetallada"></p>
-                        <label for="cantidad">Seleccionar Cantidad Disponible</label>
-                        <input id="cantidad" min="0" name="cantidad" value="0" type="number"
-                            class="form-control mt-1 mb-2" placeholder="Seleccionar Disponibilidad" required />
-                        <p class="msjAlerta" id="msjCantidad"></p>
-                        <label for="categoria">Seleccionar Categoría</label>
+                </div>
 
-                        
+                <div class="col-md-6 col-sm-12 mt-3 mb-3">
+                    <div class="form-group">
+                        <label for="nombreProducto"> Nombre del Producto</label>
+                        <input type="text" class="form-control mt-1 mb-2" name="nombreProducto" id="nombreProducto" placeholder="Ingresar Nombre del Producto" required>
+                        <p class="msjAlerta" id="msjNombre"></p>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="precioP">Precio del Producto</label>
+                        <input id="precioP" min="0" name="precioP" value="0" type="number"class="form-control mt-1 mb-2" placeholder="Ingrese Precio del Producto" required />
+                        <p class="msjAlerta" id="msjPrecio"></p>
+                    </div>
+                                
+                    <div class="form-group">
+                        <label for="descripcionCorta">Descripción Corta</label>
+                        <input type="text" class="form-control mt-1 mb-2" name="descripcionCorta" id="descripcionCorta" placeholder="Ingresar Descripción Corta" required>
+                        <p class="msjAlerta" id="msjCorta"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcionDetallada">Descripción Detallada</label>
+                        <textarea type="text" class="form-control mt-1 mb-2" name="descripcionDetallada"id="descripcionDetallada" placeholder="Ingresar Descripción Detallada" required></textarea>
+                        <p class="msjAlerta" id="msjDetallada"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cantidad">Seleccionar Cantidad Disponible</label>
+                        <input id="cantidad" min="0" name="cantidad" value="0" type="number" class="form-control mt-1 mb-2" placeholder="Seleccionar Disponibilidad" required />
+                        <p class="msjAlerta" id="msjCantidad"></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Seleccionar Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option selected>Categoría</option>
                             {% for c in categoria_p %}
                             <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
                             {% endfor %}
-                            <!--<option value="1">Polera</option>
-                            <option value="2">Pantalones</option>
-                            <option value="3">Zapatillas</option>
-                            <option value="4">Polerones</option>
-                            <option value="5">Chaquetas</option>
-                                -->
                         </select>
-
                         <p class="msjAlerta" id="msjCategorias"></p>
                         <p class="msjAlerta" id="msj"></p>
-
-                        <button type="submit" href="" class="btn btn-primary px-3 mt-3">Agregar Producto</button>
                     </div>
+        
+                    <button type="submit" class="btn btn-primary px-3 mt-3">Agregar Producto</button>
                 </div>
-            </div>
+            </div> 
         </form>
     </div>
 
-
     {% include 'core/footer.html' %}
-        <script src="{% static 'core/js/Varios.js' %}"></script>
+    <script src="{% static 'core/js/Varios.js' %}"></script>
 </body>
 
 </html>

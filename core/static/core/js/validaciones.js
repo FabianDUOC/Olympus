@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //FOrmulario INICIO SESIÓN
+    //FORMULARIO INICIO SESIÓN
     $("#iniciar").submit(function (e) {
         e.preventDefault();
 
@@ -308,7 +308,6 @@ $(document).ready(function () {
 
     // FORMULARIO AGREGAR PRODUCTO
     $("#agregarP").submit(function (e) {
-        e.preventDefault();
 
         var nombre = $("#nombreProducto").val();
         var precio = $("#precioP").val();
@@ -361,13 +360,7 @@ $(document).ready(function () {
         if (entrar) {
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Producto Agregado',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            $("#agregarP")[0].reset();
+        
         }
     })
 

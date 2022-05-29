@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Producto, Categoria
+from .models import Estatus, Producto, Categoria, Categoria
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -32,6 +33,20 @@ def agregarProducto(request):
     return render(request,'core/agregarProducto.html',contexto)
 
 def registrarP(request):
+    nombre = request.POST['nombreProducto']
+    descripcionC = request.POST['descripcionCorta']
+    descripcionL = request.POST['descripcionDetallada']
+    precio = request.POST['precioP']
+    stock = request.POST['cantidad']
+    foto = request.FILES['fotoInput']
+    categoria = request.POST['categoria']
+
+    categoria2 = Categoria.objects.get(idCategoria = categoria)
+
+    estatus = Estatus.objects.get(idEstatus = 1)
+
+    Producto.objects.create(nombreProducto = nombre, descCorta = descripcionC, descLarga = descripcionL, precio = precio, stock = stock, foto = foto, categoria = categoria2, estatus = estatus)
+    messages.success(request,'Mascota Registrada')
     return redirect('agregarProducto')
 
 def catalogoPoleras(request):
@@ -47,7 +62,10 @@ def catalogoPolerones(request):
     return render(request,'core/catalogoPolerones.html')
 
 def catalogoChaquetas(request):
-    return render(request,'core/catalogoChaquetas.html')
+    id_categoria = Categoria.objects.get(idCategoria = 1)
+    chaquetas = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las chaquetas
+    contexto = {"chaquetas":chaquetas}
+    return render(request,'core/catalogoChaquetas.html',contexto)
 
 def cuenta(request):
     return render(request,'core/cuenta.html')
