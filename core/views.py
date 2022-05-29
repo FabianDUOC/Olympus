@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import Estatus, Producto, Categoria, Categoria
 from django.contrib import messages
@@ -21,8 +22,10 @@ def registro(request):
 def categoriaProducto(request):
     return render(request,'core/categoriaProducto.html')
 
-def producto(request):
-    return render(request,'core/producto.html')
+def producto(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    contexto = {"producto":producto}  
+    return render(request,'core/producto.html', contexto)
 
 def editarCuenta(request):
     return render(request,'core/editarCuenta.html')
@@ -46,36 +49,36 @@ def registrarP(request):
     estatus = Estatus.objects.get(idEstatus = 1)
 
     Producto.objects.create(nombreProducto = nombre, descCorta = descripcionC, descLarga = descripcionL, precio = precio, stock = stock, foto = foto, categoria = categoria2, estatus = estatus)
-    messages.success(request,'Producto Registrado')
+    messages.success(request,'Producto Agregado')
     return redirect('agregarProducto')
 
 def catalogoChaquetas(request):
     id_categoria = Categoria.objects.get(idCategoria = 1)
-    chaquetas = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las chaquetas
+    chaquetas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las chaquetas
     contexto = {"chaquetas":chaquetas}
     return render(request,'core/catalogoChaquetas.html', contexto)
 
 def catalogoPantalones(request):
     id_categoria = Categoria.objects.get(idCategoria = 2)
-    pantalones = Producto.objects.filter(categoria = id_categoria) #Seleccionar todos los pantalones
+    pantalones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todos los pantalones
     contexto = {"pantalones":pantalones}
     return render(request,'core/catalogoPantalones.html', contexto)
 
 def catalogoPoleras(request):
     id_categoria = Categoria.objects.get(idCategoria = 3)
-    poleras = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las poleras
+    poleras = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las poleras
     contexto = {"poleras":poleras}
     return render(request,'core/catalogoPoleras.html')
 
 def catalogoPolerones(request):
     id_categoria = Categoria.objects.get(idCategoria = 4)
-    polerones = Producto.objects.filter(categoria = id_categoria) #Seleccionar todos los polerones
+    polerones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todos los polerones
     contexto = {"polerones":polerones}
     return render(request,'core/catalogoPolerones.html', contexto)
 
 def catalogoZapatillas(request):
     id_categoria = Categoria.objects.get(idCategoria = 5)
-    zapatillas = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las zapatillas
+    zapatillas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las zapatillas
     contexto = {"zapatillas":zapatillas}
     return render(request,'core/catalogoZapatillas.html', contexto)
 

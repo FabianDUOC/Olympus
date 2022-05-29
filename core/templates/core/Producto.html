@@ -9,25 +9,24 @@
       {% block detalleProducto %}
       <div class="row">
         <div class="col-md-6 col-sm-12 mt-3 mb-3">
-          <img src="{% static 'core/img/Chaqueta.png' %}" class="img-thumbnail" alt="...">
+          <img src="{{ producto.foto.url }}" class="img-thumbnail" alt="...">
         </div>
         <div class="col-md-6 col-sm-12 mt-3 mb-3">
           <div class="row row px-3">
             <h3>
-              Chaqueta KNOX
+              {{ producto.nombreProducto }}
             </h3>
             <p style="color: rgb(0, 100, 255); font-size: 120%;">
-              $50.000
+              ${{ producto.precio }}
             </p>
             <h5>
-              Descripcion
+              {{ producto.descCorta }}
             </h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quibusdam, officiis eum sit, velit dolore
-              voluptas, quae soluta totam itaque cum tenetur id libero dolorem consequatur culpa impedit beatae quia.
+              {{ producto.descLarga }}
             </p>
             <h5>
-              Disponibilidad: 8
+              Disponibilidad: {{ producto.stock }}
             </h5>
             <b>Seleccionar Cantidad</b>
             <div class="form-outline">

@@ -22,7 +22,7 @@
     <!--AGREGAR PRODUCTO-->
     <!--
     ======================================================================================================= -->
-    {% if messages == "Producto Registrado" %}
+    {% if messages %}    
         <script>
             Swal.fire({
                 icon: 'success',
@@ -31,7 +31,6 @@
                 timer: 1700
               })
         </script>
-        messages = "false"
     {% endif %}
     <div class="container">
         <form action="{% url 'registrarP' %}" method="POST" id="agregarP" enctype="multipart/form-data">
