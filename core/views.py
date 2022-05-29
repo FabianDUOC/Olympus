@@ -46,26 +46,38 @@ def registrarP(request):
     estatus = Estatus.objects.get(idEstatus = 1)
 
     Producto.objects.create(nombreProducto = nombre, descCorta = descripcionC, descLarga = descripcionL, precio = precio, stock = stock, foto = foto, categoria = categoria2, estatus = estatus)
-    messages.success(request,'Mascota Registrada')
+    messages.success(request,'Producto Registrado')
     return redirect('agregarProducto')
-
-def catalogoPoleras(request):
-    return render(request,'core/catalogoPoleras.html')
-
-def catalogoPantalones(request):
-    return render(request,'core/catalogoPantalones.html')
-
-def catalogoZapatillas(request):
-    return render(request,'core/catalogoZapatillas.html')
-
-def catalogoPolerones(request):
-    return render(request,'core/catalogoPolerones.html')
 
 def catalogoChaquetas(request):
     id_categoria = Categoria.objects.get(idCategoria = 1)
     chaquetas = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las chaquetas
     contexto = {"chaquetas":chaquetas}
-    return render(request,'core/catalogoChaquetas.html',contexto)
+    return render(request,'core/catalogoChaquetas.html', contexto)
+
+def catalogoPantalones(request):
+    id_categoria = Categoria.objects.get(idCategoria = 2)
+    pantalones = Producto.objects.filter(categoria = id_categoria) #Seleccionar todos los pantalones
+    contexto = {"pantalones":pantalones}
+    return render(request,'core/catalogoPantalones.html', contexto)
+
+def catalogoPoleras(request):
+    id_categoria = Categoria.objects.get(idCategoria = 3)
+    poleras = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las poleras
+    contexto = {"poleras":poleras}
+    return render(request,'core/catalogoPoleras.html')
+
+def catalogoPolerones(request):
+    id_categoria = Categoria.objects.get(idCategoria = 4)
+    polerones = Producto.objects.filter(categoria = id_categoria) #Seleccionar todos los polerones
+    contexto = {"polerones":polerones}
+    return render(request,'core/catalogoPolerones.html', contexto)
+
+def catalogoZapatillas(request):
+    id_categoria = Categoria.objects.get(idCategoria = 5)
+    zapatillas = Producto.objects.filter(categoria = id_categoria) #Seleccionar todas las zapatillas
+    contexto = {"zapatillas":zapatillas}
+    return render(request,'core/catalogoZapatillas.html', contexto)
 
 def cuenta(request):
     return render(request,'core/cuenta.html')

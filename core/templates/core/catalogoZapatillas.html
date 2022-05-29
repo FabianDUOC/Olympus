@@ -4,17 +4,19 @@
 {% block catalogo %}
     <div class="container-fluid">
     <div class="row row-cols-2 row-cols-md-4 mt-2 mb-4 gy-3">
-      <div class="col">
-        <div class="card h-100">
-          <a href="/Chaqueta1.html"><img src="{% static 'core/img/Zapatillas.png' %}" class="card-img-top imgcatal" alt="..."></a>
-          <div class="card-body">
-            <h5 class="card-title">Chaqueta KNOX</h5>
-            <p class="card-text">Es una Increible Chaqueta KNOX</p>
-            <p class="card-text" style="color: rgb(211, 20, 20); font-size: 150%;">$50.000</p>
-            <a href="#" class="btn btn-primary">Agregar al Carro</a>
+      {% for z in zapatillas %}
+        <div class="col">
+          <div class="card h-100">
+            <a href="{% url 'producto' %}"><img src="{{ c.foto.url }}" class="card-img-top imgcatal" alt="..."></a>
+            <div class="card-body">
+              <h5 class="card-title">{{ z.nombreProducto }}</h5>
+              <p class="card-text">{{ z.descCorta }}</p>
+              <p class="card-text" style="color: rgb(211, 20, 20); font-size: 150%;">{{ z.precio }}</p>
+              <a href="#" class="btn btn-primary">Agregar al Carro</a>
+            </div>
           </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
   {% endblock catalogo %}
