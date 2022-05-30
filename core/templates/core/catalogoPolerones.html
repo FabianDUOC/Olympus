@@ -7,7 +7,10 @@
       {% for p in polerones %}
         <div class="col">
           <div class="card h-100">
-            <a href="{% url 'producto' p.idProducto %}"><img src="{{ c.foto.url }}" class="card-img-top imgcatal" alt="..."></a>
+            <div class="text-center">
+              <a href="{% url 'producto' p.idProducto %}"><img src="{{ c.foto.url }}" class="card-img-top imgcatal" alt="..."></a>
+            </div>
+            
             <div class="card-body">
               <h5 class="card-title">{{ p.nombreProducto }}</h5>
               <p class="card-text">{{ p.descCorta }}</p>

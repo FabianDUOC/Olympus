@@ -7,7 +7,9 @@
       {% for c in chaquetas %}
         <div class="col">
           <div class="card h-100">
-            <a href="{% url 'producto' c.idProducto %}"><img src="{{ c.foto.url }}" class="card-img-top imgcatal" alt="..."></a>
+            <div class="text-center">
+            <a href="{% url 'producto' c.idProducto %}"><img src="{{ c.foto.url }}" class="card-img-top " alt="..."></a>
+          </div>
             <div class="card-body">
               <h5 class="card-title">{{ c.nombreProducto }}</h5>
               <p class="card-text">{{ c.descCorta }}</p>
