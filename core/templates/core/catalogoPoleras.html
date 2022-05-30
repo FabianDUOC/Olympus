@@ -2,24 +2,29 @@
 {% load static %}
 
 {% block catalogo %}
-    <div class="container-fluid">
-    <div class="row row-cols-2 row-cols-md-4 mt-2 mb-4 gy-3">
-      {% for p in poleras %}
-        <div class="col">
-          <div class="card h-100">
-            <div class="text-center">
-              <a href="{% url 'producto' p.idProducto %}"><img src="{{ p.foto.url }}" class="card-img-top imgcatal" alt="..."></a>
+<div class="container-fluid">
+  <div class="row row-cols-2 row-cols-md-4 mt-2 mb-4 gy-3">
+    {% for p in poleras %}
+    <div class="col">
+      <div class="card h-100">
+        <div class="text-center">
+          <a href="{% url 'producto' p.idProducto %}"><img src="{{ p.foto.url }}" class="card-img-top imgcatal"
+              alt="...">
+            <div class="overlay">
+              Click para ver producto
             </div>
-            
-            <div class="card-body">
-              <h5 class="card-title">{{ p.nombreProducto }}</h5>
-              <p class="card-text">{{ p.descCorta }}</p>
-              <p class="card-text" style="color: rgb(211, 20, 20); font-size: 150%;">${{ p.precio }}</p>
-              <a href="#" class="btn btn-primary">Agregar al Carro</a>
-            </div>
-          </div>
+          </a>
         </div>
-      {% endfor %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ p.nombreProducto }}</h5>
+          <p class="card-text">{{ p.descCorta }}</p>
+          <p class="card-text" style="color: rgb(211, 20, 20); font-size: 150%;">${{ p.precio }}</p>
+          <a href="#" class="btn btn-primary">Agregar al Carro</a>
+        </div>
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endblock catalogo %}
+</div>
+{% endblock catalogo %}
