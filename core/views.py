@@ -68,7 +68,7 @@ def catalogoPoleras(request):
     id_categoria = Categoria.objects.get(idCategoria = 3)
     poleras = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las poleras
     contexto = {"poleras":poleras}
-    return render(request,'core/catalogoPoleras.html')
+    return render(request,'core/catalogoPoleras.html', contexto)
 
 def catalogoPolerones(request):
     id_categoria = Categoria.objects.get(idCategoria = 4)
