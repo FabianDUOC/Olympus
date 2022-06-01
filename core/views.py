@@ -121,7 +121,11 @@ def editarP(request, id):
     producto.stock = stock
     producto.categoria = categoria2
 
-
+    try:
+        foto = request.FILES['fotoInput']
+        producto.foto = foto
+    except:
+        foto = "No hay cambio"
 
     #update
     producto.save() 
