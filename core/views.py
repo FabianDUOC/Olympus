@@ -54,40 +54,94 @@ def registrarP(request):
 
 def catalogoChaquetas(request):
     id_categoria = Categoria.objects.get(idCategoria = 1)
-    chaquetas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las chaquetas
+    chaquetas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todas las chaquetas
     contexto = {"chaquetas":chaquetas}
     return render(request,'core/catalogoChaquetas.html', contexto)
 
 def catalogoPantalones(request):
     id_categoria = Categoria.objects.get(idCategoria = 2)
-    pantalones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todos los pantalones
+    pantalones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todos los pantalones
     contexto = {"pantalones":pantalones}
     return render(request,'core/catalogoPantalones.html', contexto)
 
 def catalogoPoleras(request):
     id_categoria = Categoria.objects.get(idCategoria = 3)
-    poleras = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las poleras
+    poleras = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todas las poleras
     contexto = {"poleras":poleras}
     return render(request,'core/catalogoPoleras.html', contexto)
 
 def catalogoPolerones(request):
     id_categoria = Categoria.objects.get(idCategoria = 4)
-    polerones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todos los polerones
+    polerones = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todos los polerones
     contexto = {"polerones":polerones}
     return render(request,'core/catalogoPolerones.html', contexto)
 
 def catalogoZapatillas(request):
     id_categoria = Categoria.objects.get(idCategoria = 5)
-    zapatillas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1) #Seleccionar todas las zapatillas
+    zapatillas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todas las zapatillas
     contexto = {"zapatillas":zapatillas}
     return render(request,'core/catalogoZapatillas.html', contexto)
 
 def cuenta(request):
     return render(request,'core/cuenta.html')
 
-
 def carrito(request):
     return render(request,'core/carrito.html')
 
 def contacto(request):
     return render(request,'core/contacto.html')
+
+def editarProducto(request, id):
+    categorias = Categoria.objects.all()
+    producto = Producto.objects.get(idProducto = id)
+    contexto = {"producto":producto, "categoria_p":categorias}  
+    return render(request, 'core/editarProducto.html', contexto)
+
+def editarP(request, id):
+    nombre = request.POST['nombreProducto']
+    descripcionC = request.POST['descripcionCorta']
+    descripcionL = request.POST['descripcionDetallada']
+    precio = request.POST['precioP']
+    stock = request.POST['cantidad']
+
+    categoria = request.POST['categoria']
+
+
+
+    categoria2 = Categoria.objects.get(idCategoria = categoria)
+
+    # obtener el registro de la base de datos
+    producto = Producto.objects.get(idProducto = id)
+
+    # reemplazar valores en el registro
+    producto.nombreProducto = nombre
+    producto.descCorta = descripcionC
+    producto.descLarga = descripcionL
+    producto.precio = precio
+    producto.stock = stock
+    producto.categoria = categoria2
+
+
+
+    #update
+    producto.save() 
+    messages.success(request, 'Producto modificado')
+    return redirect('editarProducto',id)
+
+def eliminarProducto(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    estatus = Estatus.objects.get(idEstatus = 2)
+    
+    producto.estatus = estatus
+    producto.save()
+    messages.success(request, 'Producto eliminado')
+    if producto.categoria.idCategoria == 1:
+        return redirect('catalogoChaquetas')
+    elif producto.categoria.idCategoria == 2:
+        return redirect('catalogoPantalones')
+    elif producto.categoria.idCategoria == 3:
+        return redirect('catalogoPoleras')
+    elif producto.categoria.idCategoria == 2:
+        return redirect('catalogoPolerones')
+    elif producto.categoria.idCategoria == 2:
+        return redirect('catalogoZapatillas')

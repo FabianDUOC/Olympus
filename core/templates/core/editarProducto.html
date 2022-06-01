@@ -19,58 +19,57 @@
 <body>
     {% include 'core/navbar.html' %}
 
-    <!--AGREGAR PRODUCTO-->
+    <!--EDITAR PRODUCTO-->
     <!--
     ======================================================================================================= -->
     <div class="container">
-        <form action="{% url 'registrarP' %}" method="POST" id="agregarP" enctype="multipart/form-data">
+        <form action="{% url 'editarP' producto.idProducto %}" method="POST" id="agregarP" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
                     <div class="form-group">
                         <label for="fotoP">Foto Producto: </label>
                         <div class="ratio ratio-1x1">
-                            <img src="{% static 'core/img/producto.png' %}" id="foto" alt="...">
+                            <img src="{{ producto.foto.url }}" id="foto" alt="...">
                         </div>
-                        <input type="file" name="fotoInput" id="fotoInput" accept=".jpg,.png" required />
+                        <input type="file" name="fotoInput" id="fotoInput" accept=".jpg,.png"/>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
                     <div class="form-group">
                         <label for="nombreProducto"> Nombre del Producto</label>
-                        <input type="text" class="form-control mt-1 mb-2" name="nombreProducto" id="nombreProducto" placeholder="Ingresar Nombre del Producto" required>
+                        <input type="text" class="form-control mt-1 mb-2" name="nombreProducto" id="nombreProducto" placeholder="Ingresar Nombre del Producto" required value="{{ producto.nombreProducto }}">
                         <p class="msjAlerta" id="msjNombre"></p>
                     </div>
         
                     <div class="form-group">
                         <label for="precioP">Precio del Producto</label>
-                        <input id="precioP" min="0" name="precioP" value="0" type="number"class="form-control mt-1 mb-2" placeholder="Ingrese Precio del Producto" required />
+                        <input id="precioP" min="0" name="precioP" type="number"class="form-control mt-1 mb-2" placeholder="Ingrese Precio del Producto" required value="{{ producto.precio }}">
                         <p class="msjAlerta" id="msjPrecio"></p>
                     </div>
                                 
                     <div class="form-group">
                         <label for="descripcionCorta">Descripción Corta</label>
-                        <input type="text" class="form-control mt-1 mb-2" name="descripcionCorta" id="descripcionCorta" placeholder="Ingresar Descripción Corta" required>
+                        <input type="text" class="form-control mt-1 mb-2" name="descripcionCorta" id="descripcionCorta" placeholder="Ingresar Descripción Corta" required value="{{ producto.descCorta }}">
                         <p class="msjAlerta" id="msjCorta"></p>
                     </div>
                     
                     <div class="form-group">
                         <label for="descripcionDetallada">Descripción Detallada</label>
-                        <textarea type="text" class="form-control mt-1 mb-2" name="descripcionDetallada"id="descripcionDetallada" placeholder="Ingresar Descripción Detallada" required></textarea>
+                        <textarea type="text" class="form-control mt-1 mb-2" name="descripcionDetallada"id="descripcionDetallada" placeholder="Ingresar Descripción Detallada" required>{{ producto.descLarga }}</textarea>
                         <p class="msjAlerta" id="msjDetallada"></p>
                     </div>
                     
                     <div class="form-group">
                         <label for="cantidad">Seleccionar Cantidad Disponible</label>
-                        <input id="cantidad" min="0" name="cantidad" value="0" type="number" class="form-control mt-1 mb-2" placeholder="Seleccionar Disponibilidad" required />
+                        <input id="cantidad" min="0" name="cantidad" type="number" class="form-control mt-1 mb-2" placeholder="Seleccionar Disponibilidad" required value="{{ producto.stock }}">
                         <p class="msjAlerta" id="msjCantidad"></p>
                     </div>
                     
                     <div class="form-group">
                         <label for="categoria">Seleccionar Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option selected disabled>Categoría</option>
                             {% for c in categoria_p %}
                             <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
                             {% endfor %}
@@ -79,7 +78,7 @@
                         <p class="msjAlerta" id="msj"></p>
                     </div>
         
-                    <button type="submit" class="btn btn-primary px-3 mt-3">Agregar Producto</button>
+                    <button type="submit" class="btn btn-primary px-3 mt-3">Guardar Cambios</button>
                 </div>
             </div> 
         </form>
