@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympus</title>
+  <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+  <script src="https://kit.fontawesome.com/35863c2e47.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="{% static 'core/img/logo.png' %}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  {% include 'core/navbar.html' %}
+
+  <!--
+    ======================================================================================================= -->
+  <!-- CONTACTANOS -->
+  <!--
+    ======================================================================================================= -->
+
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6" style="text-align: center;">
+        <h1> Contáctanos </h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum blanditiis et cupiditate maiores minus
+          laudantium nam sit consectetur, repellat suscipit impedit quia exercitationem doloremque corrupti sint iure
+          facere voluptates! Est.</p>
+      </div>
+      <div class="col-lg-3 ">
+      </div>
+    </div>
+  </div>
+  <!--Formulario-->
+  <div class="container py-5">
+    <div class="row py-5">
+      <form class="col-md-9 m-auto" role="form" action="" method="post" id="formContanto">
+        <div class="row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control mt-1" name="nombre" id="nombre" placeholder="Nombre" required>
+            <p class="msjAlerta" id="mensajes1"></p>
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control mt-1" name="email" id="email" placeholder="Email" required>
+            <p class="msjAlerta" id="msjCorreo"></p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="asunto">Asunto</label>
+          <input type="text" class="form-control mt-1" name="asunto" id="asunto" placeholder="Asunto" required>
+        </div>
+        <div class="mb-3">
+          <label for="mensaje">Mensaje</label>
+          <textarea class="form-control mt-1" name="mensaje" id="mensaje" placeholder="Mensaje" rows="8"
+            required></textarea>
+        </div>
+        <div class="row">
+          <div class="col text-end mt-2">
+            <p class="msjAlerta" id="mensajes2"></p>
+            <button type="submit" class="btn btn-success btn-lg px-3">Enviar</a button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="mapa"></div>
+      </div>
+      <div class="col-md-6">
+        <h1>Ven a nuestra sucursal</h1>
+        <p>
+          Dirección: #Hilda 4163, Conchalí, Región Metropolitana</p>
+        <h3>Horario de Atencion</h3>
+        <p>Lunes a Sábado: 10:00 - 19:30</p>
+        <p>Domingo y Feriados: 12:00 - 16:30</p>
+
+      </div>
+    </div>
+  </div>
+
+
+  {% include 'core/footer.html' %}
+  <script src="{% static 'core/js/mapa.js' %}"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvc2WaHjS1HZTfBULYNAMIZK5cOvGbCzc&callback=iniciarMapa"></script>
+</body>
+
+</html>

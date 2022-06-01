@@ -84,3 +84,10 @@ def catalogoZapatillas(request):
 
 def cuenta(request):
     return render(request,'core/cuenta.html')
+
+
+def carrito(request):
+    return render(request,'core/carrito.html')
+
+def contacto(request):
+    return render(request,'core/contacto.html')
