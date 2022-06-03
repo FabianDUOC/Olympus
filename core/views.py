@@ -54,7 +54,7 @@ def registrarP(request):
 
     Producto.objects.create(nombreProducto = nombre, descCorta = descripcionC, descLarga = descripcionL, precio = precio, stock = stock, foto = foto, categoria = categoria2, estatus = estatus)
     messages.success(request,'Producto Agregado')
-    return redirect('agregarProducto')
+    return redirect('core:agregarProducto')
 
 def catalogoChaquetas(request):
     id_categoria = Categoria.objects.get(idCategoria = 1)
@@ -105,7 +105,7 @@ def enviarCon(request):
     
     send_mail(asunto, mensaje, emisor, receptor)
     messages.success(request,'Mensaje Enviado')
-    return redirect('contacto')
+    return redirect('core:contacto')
 
 def editarProducto(request, id):
     categorias = Categoria.objects.all()
@@ -146,7 +146,7 @@ def editarP(request, id):
     #update
     producto.save() 
     messages.success(request, 'Producto modificado')
-    return redirect('editarProducto',id)
+    return redirect('core:editarProducto',id)
 
 def eliminarProducto(request, id):
     producto = Producto.objects.get(idProducto = id)
@@ -156,12 +156,12 @@ def eliminarProducto(request, id):
     producto.save()
     messages.success(request, 'Producto eliminado')
     if producto.categoria.idCategoria == 1:
-        return redirect('catalogoChaquetas')
+        return redirect('core:catalogoChaquetas')
     elif producto.categoria.idCategoria == 2:
-        return redirect('catalogoPantalones')
+        return redirect('core:catalogoPantalones')
     elif producto.categoria.idCategoria == 3:
-        return redirect('catalogoPoleras')
+        return redirect('core:catalogoPoleras')
     elif producto.categoria.idCategoria == 2:
-        return redirect('catalogoPolerones')
+        return redirect('core:catalogoPolerones')
     elif producto.categoria.idCategoria == 2:
-        return redirect('catalogoZapatillas')
+        return redirect('core:catalogoZapatillas')
