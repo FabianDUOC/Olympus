@@ -1,7 +1,10 @@
+from email import message
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import Estatus, Producto, Categoria, Categoria
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def index(request):
@@ -89,7 +92,19 @@ def carrito(request):
     return render(request,'core/carrito.html')
 
 def contacto(request):
+
     return render(request,'core/contacto.html')
+
+def enviarCon(request):
+
+    asunto= request.POST['asunto']
+    mensaje= request.POST['mensaje'] + 'Nombre Usuario: ' + request.POST['nombre'] + 'Correo Electronico: ' + request.POST['email']
+    emisor=settings.EMAIL_HOST_USER
+    receptor=['lucasnofunciona@gmail.com']
+    
+    send_mail(asunto, mensaje, emisor, receptor)
+    messages.success(request,'Mensaje Enviado')
+    return redirect('contacto')
 
 def editarProducto(request, id):
     categorias = Categoria.objects.all()

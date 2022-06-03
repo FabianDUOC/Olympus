@@ -110,7 +110,7 @@ $(document).ready(function () {
 
     // FORMNULARIO CONTÁCTANOS
     $("#formContanto").submit(function (e) {
-        e.preventDefault();
+
 
         var nom = $("#nombre").val();
         var correo = $("#email").val();
@@ -133,6 +133,7 @@ $(document).ready(function () {
 
         if (entrar) {
             $("#mensajes1").html(msj);
+            e.preventDefault();
         }
         else {
             $("#mensajes1").html("");

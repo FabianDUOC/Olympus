@@ -42,7 +42,8 @@
   <!--Formulario-->
   <div class="container py-5">
     <div class="row py-5">
-      <form class="col-md-9 m-auto" role="form" action="" method="post" id="formContanto">
+      <form class="col-md-9 m-auto" action="{% url 'enviarCon' %}" method="POST" id="formContanto" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="row">
           <div class="form-group col-md-6 mb-3">
             <label for="nombre">Nombre</label>
@@ -67,7 +68,7 @@
         <div class="row">
           <div class="col text-end mt-2">
             <p class="msjAlerta" id="mensajes2"></p>
-            <button type="submit" class="btn btn-success btn-lg px-3">Enviar</a button>
+            <button type="submit" class="btn btn-success btn-lg px-3">Enviar</button>
           </div>
         </div>
       </form>
