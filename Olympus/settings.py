@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.login_form',
             ],
         },
     },
@@ -140,3 +142,5 @@ EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="olympus.paginaonline@gmail.com"
 EMAIL_HOST_PASSWORD="ixmitgkvmnqoltcc"
+
+AUTH_USER_MODEL = "users.UserProfile"

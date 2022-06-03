@@ -16,13 +16,13 @@ class Estatus(models.Model):
         return self.nombreE
 
 class Producto(models.Model):
-    idProducto = models.AutoField(primary_key=True, verbose_name='código del Producto')
+    idProducto = models.AutoField(primary_key=True, verbose_name='Código del Producto')
     nombreProducto = models.CharField(max_length=30, verbose_name='Nombre del Producto')
     descCorta = models.CharField(max_length=30, verbose_name='Descripción Corta del Producto')
     descLarga = models.CharField(max_length=200, verbose_name='Descripción Detallada del Producto')
     precio = models.IntegerField(verbose_name='Precio del Producto')
     stock = models.IntegerField(verbose_name='Cantidad en Stock del Producto')
-    foto = models.ImageField(upload_to="core", null= True)
+    foto = models.ImageField(upload_to="core/", default='core/default.png',null= True)
     categoria = models.ForeignKey(Categoria,on_delete= models.CASCADE)
     estatus = models.ForeignKey(Estatus,on_delete= models.PROTECT)
 

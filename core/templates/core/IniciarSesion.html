@@ -35,31 +35,35 @@
   <!--Formulario-->
   <div class="container py-3 mb-5">
     <div class="row py-5">
-      <form class="col-md-9 m-auto" role="form" action="" method="post" id="iniciar">
+      <form class="col-md-9 m-auto" role="form" action="{% url 'users:login' %}" method="POST" id="login">
+      {% csrf_token %} 
+
         <div class="mb-3 form-group">
-          <label for="emailInicio">Correo Electrónico</label>
-          <input type="email" class="form-control  mt-1" required name="emailInicio" id="emailInicio"
-            placeholder="Ingresar Correo Electrónico">
+          <label>Correo Electrónico</label>
+          {{ loginForm.email }}
         </div>
+
         <div class="mb-3 form-group">
-          <label for="claveinicio">Contraseña</label>
-          <input type="password" class="form-control mt-1" required name="claveinicio" id="claveinicio"
-            placeholder="Ingresar Contraseña">
+          <label>Contraseña</label>
+          {{ loginForm.password }}
         </div>
+
         <div class="form-check">
           <input type="checkbox" class="form-check-input" id="checkInicio">
           <label class="form-check-label" for="checkInicio">Recordar mis datos</label>
         </div>
+
         <div class="d-grid gap-3">
           <p class="msjAlerta" id="msjCorreo"></p>
           <button type="submit" class="btn btn-primary ">Iniciar Sesión</button>
-          <a button type="button" href="{% url 'recuperarClave' %}" class="btn btn-danger ">Olvide mi contraseña</a button>
+          <a button type="button" href="{% url 'core:recuperarClave' %}" class="btn btn-danger ">Olvide mi contraseña</a button>
         </div>
+
       </form>
     </div>
     <h6 style="text-align: center;">¿Nuevo Usuario?</h6>
     <div class="d-grid col-6 mx-auto">
-      <a button type="button" href="{% url 'registro' %}" class="btn btn-dark ">¡Click aqui para unirte! </a button>
+      <a button type="button" href="{% url 'core:registro' %}" class="btn btn-dark ">¡Click aqui para unirte! </a button>
     </div>
   </div>
 

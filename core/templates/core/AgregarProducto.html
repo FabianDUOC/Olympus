@@ -23,9 +23,10 @@
     <!--
     ======================================================================================================= -->
     <div class="container">
-        <form action="{% url 'registrarP' %}" method="POST" id="agregarP" enctype="multipart/form-data">
+        <form action="{% url 'core:registrarP' %}" method="POST" id="agregarP" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="row">
+                
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
                     <div class="form-group">
                         <label for="fotoP">Foto Producto: </label>

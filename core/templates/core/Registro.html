@@ -49,37 +49,40 @@
       </div>
       <div class="col-lg-6 col-sm-10 mt-3 mb-3">
         <div class="row">
-          <form action="" method="post" id="formRegistro">
-            <label for="nombre">
-              Nombre
-            </label>
-            <input type="text" class="form-control mt-1 mb-2" name="nombre" id="nombre" placeholder="Ingresar Nombre"
-              required>
-            <p class="msjAlerta" id="msjNom"></p>
-            <label for="apellidoPa">
-              Apellido Paterno
-            </label>
-            <input type="text" class="form-control mt-1 mb-2" name="apellidoPa" id="apellidoPa"
-              placeholder="Ingresar Primer Apellido" required>
-            <p class="msjAlerta" id="msjApellidoPa"></p>
-            <label for="apellidoMa">
-              Apellido Materno
-            </label>
-            <input type="text" class="form-control mt-1 mb-2" name="apellidoMa" id="apellidoMa"
-              placeholder="Ingresar Segundo Apellido" required>
-            <p class="msjAlerta" id="msjApellidoMa"></p>
-            <label for="correoRegistro">
-              Correo Electrónico
-            </label>
-            <input type="email" class="form-control mt-1 mb-2" name="correoRegistro" id="correoRegistro"
-              placeholder="Ingresar correo electrónico" required>
-            <p class="msjAlerta" id="msjCorreo"></p>
-            <label for="Direccion">
-              Direccion
-            </label>
-            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion"
-              placeholder="Ingresar Direccion" required>
-            <p class="msjAlerta" id="msjDireccion"></p>
+          <form action="{% url 'users:signup' %}" method="post" id="formRegistro">
+          {% csrf_token %}
+
+            <div class="mb-3 form-group">
+              <label for="correoRegistro">Correo Electrónico</label>
+              {{ signupForm.email }}
+              <p class="msjAlerta" id="msjCorreo"></p>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="nombre">Nombre</label>
+              {{ signupForm.nombre }}
+              <p class="msjAlerta" id="msjNom"></p>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="apellidoPa">Apellido Paterno</label>
+              {{ signupForm.apellidoPa }}
+              <p class="msjAlerta" id="msjApellidoPa"></p>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="apellidoMa">Apellido Materno</label>
+              {{ signupForm.apellidoMa }}
+              <p class="msjAlerta" id="msjApellidoMa"></p>
+            </div>
+            
+            <div class="mb-3 form-group">
+              <label for="Direccion">Direccion</label>
+              {{ signupForm.direccion }}
+              <p class="msjAlerta" id="msjDireccion"></p>
+            </div>
+                      
+            
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <label for="region">Región</label>
@@ -94,9 +97,7 @@
                 <p class="msjAlerta" id="msjRegion"></p>
               </div>
               <div class="col-sm-12 col-md-6">
-                <label for="comuna">
-                  Comuna
-                </label>
+                <label for="comuna">Comuna</label>
                 <div class="input-group mb-3">
                   <select class="form-select" id="comuna" name="comuna" required>
                     <option selected>Escoge tu Comuna</option>
@@ -108,25 +109,25 @@
                 <p class="msjAlerta" id="msjComuna"></p>
               </div>
             </div>
-            <label for="telefono">
-              Número
-              Telefónico
-            </label>
-            <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono" min="1"
-              placeholder="Ingresar Número Telefónico" required>
-            <p class="msjAlerta" id="msjTel"></p>
-            <label for="clave1">
-              Contraseña
-            </label>
-            <input type="password" class="form-control mt-1 mb-2" name="clave1" id="clave1"
-              placeholder="Ingresar contraseña" required>
-            <label for="clave2">
-              Repetir contraseña
-            </label>
-            <input type="password" class="form-control mt-1 mb-2" name="clave2" id="clave2"
-              placeholder="Repetir contraseña" required>
-            <p class="msjAlerta" id="msjClave"></p>
-            <p class="msjAlerta" id="msj"></p>
+
+            <div class="mb-3 form-group">
+              <label for="telefono">Número Telefónico</label>
+              {{ signupForm.telefono }}
+              <p class="msjAlerta" id="msjTel"></p>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="clave1">Contraseña</label>
+              {{ signupForm.password }}
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="clave2">Repetir contraseña</label>
+              {{ signupForm.password2 }}
+              <p class="msjAlerta" id="msjClave"></p>
+              <p class="msjAlerta" id="msj"></p>
+            </div>
+       
             <button type="submit" href="/IniciarSesion.html" class="btn btn-primary">Crear Cuenta</button>
           </form>
         </div>

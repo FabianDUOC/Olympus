@@ -42,7 +42,7 @@
   <!--Formulario-->
   <div class="container py-5">
     <div class="row py-5">
-      <form class="col-md-9 m-auto" action="{% url 'enviarCon' %}" method="POST" id="formContanto" enctype="multipart/form-data">
+      <form class="col-md-9 m-auto" action="{% url 'core:enviarCon' %}" method="POST" id="formContanto" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
           <div class="form-group col-md-6 mb-3">

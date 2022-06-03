@@ -23,7 +23,7 @@
     <!--
     ======================================================================================================= -->
     <div class="container">
-        <form action="{% url 'editarP' producto.idProducto %}" method="POST" id="agregarP" enctype="multipart/form-data">
+        <form action="{% url 'core:editarP' producto.idProducto %}" method="POST" id="agregarP" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">

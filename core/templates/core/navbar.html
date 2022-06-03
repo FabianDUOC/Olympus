@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <body>
   {% load static %}
   <!--
@@ -31,51 +32,65 @@
       <div id="MenuNavegacion" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-3">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">INICIO</a>
+            <a class="nav-link" href="{% url 'core:index' %}">INICIO</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               ROPA
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'catalogoChaquetas' %}">Chaquetas</a></li>
-              <li><a class="dropdown-item" href="{% url 'catalogoPantalones' %}">Pantalones</a></li>
-              <li><a class="dropdown-item" href="{% url 'catalogoPoleras' %}">Poleras</a></li>             
-              <li><a class="dropdown-item" href="{% url 'catalogoPolerones' %}">Polerones</a></li>
-              <li><a class="dropdown-item" href="{% url 'catalogoZapatillas' %}">Zapatillas</a></li>
+              <li><a class="dropdown-item" href="{% url 'core:catalogoChaquetas' %}">Chaquetas</a></li>
+              <li><a class="dropdown-item" href="{% url 'core:catalogoPantalones' %}">Pantalones</a></li>
+              <li><a class="dropdown-item" href="{% url 'core:catalogoPoleras' %}">Poleras</a></li>
+              <li><a class="dropdown-item" href="{% url 'core:catalogoPolerones' %}">Polerones</a></li>
+              <li><a class="dropdown-item" href="{% url 'core:catalogoZapatillas' %}">Zapatillas</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'contacto' %}">CONTACTO</a>
+            <a class="nav-link" href="{% url 'core:contacto' %}">CONTACTO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'carrito' %}">CARRITO</a>
+            <a class="nav-link" href="{% url 'core:carrito' %}">CARRITO</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'cuenta' %}">CUENTA</a>
-          </li>
+          {% if user.is_authenticated and user.is_staff == 1 %}
+            <li class="nav-item">
+              <a class="nav-link text-nowrap" href="{% url 'core:agregarProducto' %}">AGREGAR PRODUCTO</a>
+            </li>
+          {% endif %} 
         </ul>
-        <ul class="navbar-nav ms-3">
-          <li class="nav-item">
-            <a class="nav-link text-nowrap" href="{% url 'iniciarSesion' %}">INICIAR SESIÓN</a>
-          </li>
+        <ul class="navbar-nav ms-3">      
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link text-nowrap" href="{% url 'users:logout' %}">CERRAR SESIÓN</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'core:cuenta' %}">
+                <img src={{ user.foto.url }} class="rounded-circle" height="40" width='40' alt="" loading="lazy" />
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-nowrap" href="{% url 'core:iniciarSesion' %}">INICIAR SESIÓN</a>
+            </li>
+            {% endif %}         
         </ul>
       </div>
     </nav>
   </div>
 
-  {% if messages %}    
-        {% for m in messages %}
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{m}}',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            </script>
-        {% endfor %}
-    {% endif %}
+  {% if messages %}
+  {% for m in messages %}
+  
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: '{{m}}',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  </script>
+  {% endfor %}
+  {% endif %}
 
 </body>
 

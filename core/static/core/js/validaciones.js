@@ -1,9 +1,8 @@
 $(document).ready(function () {
     //FORMULARIO INICIO SESIÓN
-    $("#iniciar").submit(function (e) {
-        e.preventDefault();
+    $("#login").submit(function (e) {
 
-        var correo = $("#emailInicio").val();
+        var correo = $("#loginEmail").val();
 
         let msj = "";
         let entrar = false;
@@ -17,15 +16,10 @@ $(document).ready(function () {
 
         if (entrar) {
             $("#msjCorreo").html(msj);
+            e.preventDefault();
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Sesión iniciada',
-                showConfirmButton: false,
-                timer: 1500
-              })
-              $("#formRecupClave")[0].reset();
+            
         }
 
     })
@@ -145,12 +139,11 @@ $(document).ready(function () {
 
     // FORMULARIO REGISTRO DE CUENTA
     $("#formRegistro").submit(function (e) {
-        e.preventDefault();
 
         var nom = $("#nombre").val();
         var apellidoPa = $("#apellidoPa").val();
         var apellidoMa = $("#apellidoMa").val();
-        var email = $("#correoRegistro").val();
+        var email = $("#signupEmail").val();
         var direcc = $("#direccion").val();
         var region = $("#region").val();
         var comuna = $("#comuna").val();
@@ -224,15 +217,10 @@ $(document).ready(function () {
 
         if (entrar) {
             $("#msjClave").html(msjClaves);
+            e.preventDefault();
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Cuenta creada exitosamente',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            $("#formRegistro")[0].reset();
+            
         }
     })
 
@@ -368,7 +356,6 @@ $(document).ready(function () {
 
     // FORMULARIO EDITAR PRODUCTO
     $("#editarP").submit(function (e) {
-        e.preventDefault();
 
         var nombre = $("#nombreProducto").val();
         var precio = $("#precioP").val();
@@ -419,21 +406,17 @@ $(document).ready(function () {
         }
 
         if (entrar) {
+            e.preventDefault();
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Información de producto modificada',
-                showConfirmButton: false,
-                timer: 1500
-              })
+        
         }
     })
 
 
     // FORMULARIO MENSAJES ADMIN
     $("#formMensaje").submit(function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         Swal.fire({
             icon: 'success',
             title: 'Mensaje enviado satisfactoriamente',

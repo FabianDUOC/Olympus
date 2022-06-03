@@ -32,7 +32,7 @@
         <h5>
           Foto de Perfil
         </h5>
-        <img src="{% static 'core/img/Trabajador.png' %}" class= "img-thumbnail" alt="...">
+        <img src={{ user.foto.url }} class= "img-thumbnail" alt="...">
       </div>
       <div class="col-md-6 col-sm-12 mt-3 mb-3">
         <div class="row px-3">
@@ -40,34 +40,36 @@
             Nombre Completo
             </h3>
             <p>
-              Miguel Doggy Ford
+              {{ user.nombre }} {{ user.apellidoPa }} {{ user.apellidoMa}}
             </p>
             <h5>
               Correo Electrónico
             </h5>
             <p>
-              mi.doggy@trabajo.cl
+              {{ user.email }}
             </p>
-            <h5>
-              Cargo
-            </h5>
-            <p>
-              Administrador
-            </p>
+            {% if user.is_staff == 1 %}
+              <h5>
+                Cargo
+              </h5>
+              <p>
+                Administrador
+              </p>
+            {% endif %}
             <h5>
               Dirección
             </h5>
             <p>
-              Las Pepitas #339, Huechuraba, Región Metropolitana
+              {{ user.direccion }}
             </p>
             <h5>
               Número
               Telefónico
             </h5>
             <p>
-              +56 9 9898 4584
+              +56 {{ user.telefono }}
             </p>
-            <a href="{% url 'editarCuenta' %}" class="btn btn-primary mb-3">Editar Cuenta</a>
+            <a href="{% url 'core:editarCuenta' %}" class="btn btn-primary mb-3">Editar Cuenta</a>
         </div>
       </div>
     </div>

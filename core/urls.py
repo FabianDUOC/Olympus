@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import index, iniciarSesion, cambiarClave, recuperarClave, registro, categoriaProducto, producto, editarCuenta, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta, contacto, carrito, editarProducto, editarP, eliminarProducto, enviarCon
 
+app_name = 'core'
+
 urlpatterns = [
     path('', index, name="index"),
     path( 'iniciarSesion', iniciarSesion, name="iniciarSesion"),
