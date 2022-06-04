@@ -99,9 +99,9 @@ def contacto(request):
 def enviarCon(request):
 
     asunto = request.POST['asunto']
-    mensaje = request.POST['mensaje'] + 'Nombre Usuario: ' + request.POST['nombre'] + 'Correo Electronico: ' + request.POST['email']
+    mensaje = request.POST['mensaje']+ '\r\n' + 'Nombre De Contacto: ' + request.POST['nombre'] + ' Correo De Contacto: ' + request.POST['email']
     emisor =settings.EMAIL_HOST_USER
-    receptor =['lucasnofunciona@gmail.com']
+    receptor =['lu.morgado@duocuc.cl', 'fa.marileo@duocuc.cl']
     
     send_mail(asunto, mensaje, emisor, receptor)
     messages.success(request,'Mensaje Enviado')
@@ -165,3 +165,23 @@ def eliminarProducto(request, id):
         return redirect('core:catalogoPolerones')
     elif producto.categoria.idCategoria == 2:
         return redirect('core:catalogoZapatillas')
+
+def msjFooter(request):
+
+    asunto = 'Suscripcion Realizada'
+    mensaje = 'Usted se ha suscrito correctamente, Pronto le llegaran las nuevas ofertas'
+    emisor =settings.EMAIL_HOST_USER
+    rec = request.POST['emailF']
+    receptor = [rec]
+    pagAnt =request.POST['pagAnt']
+    print('aaaaaaaaaaaaaaaa')
+    print(pagAnt)
+    print(receptor)
+    send_mail(asunto, mensaje, emisor, receptor)
+    messages.success(request,'Suscripcion Realizada')
+    
+   
+    return redirect(pagAnt)
+
+
+

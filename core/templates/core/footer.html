@@ -17,7 +17,7 @@
 
       </section>
       <section class="">
-        <form action="" method="post" id="suscripcion">
+        <form action="{% url 'core:msjFooter' %}" method="post" id="suscripcion">
           {% csrf_token %} 
           <div class="row d-flex justify-content-center">
             <div class="col-auto">
@@ -28,8 +28,9 @@
             <div class="col-md-5 col-12">
               <!-- Email input -->
               <div class="form-outline form-white mb-4">
-                <input type="email" id="emailF" name="emailf" class="form-control" placeholder="Correo Electrónico"
+                <input type="email" id="emailF" name="emailF" class="form-control" placeholder="Correo Electrónico"
                   required />
+                  <input type="hidden" name="pagAnt" id="pagAnt" value="{{ request.path }}">
               </div>
             </div>
             <div class="col-auto">

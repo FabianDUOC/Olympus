@@ -133,7 +133,6 @@ $(document).ready(function () {
             $("#mensajes1").html("");
             $("#mensajes2").css({ 'color': 'blue' });
             $("#mensajes2").html("Mensaje enviado exitosamente");
-            $("#formContanto")[0].reset();
         }
     })
 
@@ -442,15 +441,10 @@ $(document).ready(function () {
         }
 
         if (entrar) {
+            e.preventDefault();
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Usted se ha suscrito Correctamente',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            $("#suscripcion")[0].reset();
+
         }
 
     })
