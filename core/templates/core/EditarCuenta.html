@@ -33,50 +33,53 @@
     ======================================================================================================= -->
 
     <div class="container">
-        <form action="" method="post" id="editCuenta">
+        <form action="{% url 'core:editarUsuario' user.id %}" method="post" id="editCuenta">
+        {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
                     <label>
                         Foto de Perfil
                     </label>
                     <div class="ratio ratio-1x1">
-                        <img src="{% static 'core/img/Trabajadora.png' %}" class="img-thumbnail" id="foto" alt="...">
+                        <img src={{ user.foto.url }} class="img-thumbnail" id="foto" alt="...">
                     </div>
                     <!-- Botón elegir imagen -->
                     <input type="file" name="Foto" id="fotoInput" accept=".jpg,.png" />
                 </div>
+
                 <!-- Formulario -->
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
                     <div class="row px-3">
-                        <label for="nombre">
-                            Nombre
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="nombre" id="nombre" placeholder="Romina"
-                            required>
-                        <p class="msjAlerta" id="msjNom"></p>
-                        <label for="apellidoPa">
-                            Apellido Paterno
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="apellidoPa" id="apellidoPa"
-                            placeholder="Tarragona" required>
-                        <p class="msjAlerta" id="msjApellidoPa"></p>
-                        <label for="apellidoMa">
-                            Apellido Materno
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="apellidoMa" id="apellidoMa"
-                            placeholder="Sierra" required>
-                        <p class="msjAlerta" id="msjApellidoMa"></p>
-                        <label for="email">
-                            Correo Electrónico
-                        </label>
-                        <input disabled type="text" class="form-control mt-1 mb-2" name="email" id="email"
-                            placeholder="ro.tarragona@usuario.cl">
-                        <label for="direccion">
-                            Dirección
-                        </label>
-                        <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion"
-                            placeholder="Las Salmueras #9190" required>
-                        <p class="msjAlerta" id="msjDireccion"></p>
+
+                        <div class="mb-3 form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control mt-1 mb-2" name="nombre" id="nombre" placeholder="Ingresar Nombre" value="{{ user.nombre }}" required>
+                            <p class="msjAlerta" id="msjNom"></p>
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="apellidoPa">Primer Apellido</label>
+                            <input type="text" class="form-control mt-1 mb-2" name="apellidoPa" id="apellidoPa" placeholder="Ingresar Primer Apellido" value="{{ user.apellidoPa }}" required>
+                            <p class="msjAlerta" id="msjApellidoPa"></p>
+                        </div>
+                        
+                        <div class="mb-3 form-group">
+                            <label for="apellidoMa">Segundo Apellido</label>
+                            <input type="text" class="form-control mt-1 mb-2" name="apellidoMa" id="apellidoMa"placeholder="Ingresar Segundo Apellido" value="{{ user.apellidoMa }}" required>
+                            <p class="msjAlerta" id="msjApellidoMa"></p>
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input disabled type="text" class="form-control mt-1 mb-2" name="email" id="email" placeholder="Ingresar Correo Electrónico" value="{{ user.email }}">
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion" placeholder="Ingresar Dirección" value="{{ user.direccion }}" required>
+                            <p class="msjAlerta" id="msjDireccion"></p>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <label for="region">Región</label>
@@ -91,9 +94,7 @@
                                 <p class="msjAlerta" id="msjRegion"></p>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="comuna">
-                                    Comuna
-                                </label>
+                                <label for="comuna">Comuna</label>
                                 <div class="input-group mb-3">
                                     <select class="form-select" id="comuna" name="comuna" required>
                                         <option selected>Escoge tu Comuna</option>
@@ -105,15 +106,15 @@
                                 <p class="msjAlerta" id="msjComuna"></p>
                             </div>
                         </div>
-                        <label>
-                            Número
-                            Telefónico
-                        </label>
-                        <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono"
-                            placeholder="+56 9 9738 4681" required>
-                        <p class="msjAlerta" id="msjTel"></p>
-                        <p class="msjAlerta" id="msj"></p>
-                        <button type="submit" href="/Cuenta.html" class="btn btn-primary mb-2">Guardar Cambios</button>
+
+                        <div class="mb-3 form-group">
+                            <label>Número Telefónico</label>
+                            <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono" placeholder="Ingresar Número Telefónico" value="{{ user.telefono }}" required>
+                            <p class="msjAlerta" id="msjTel"></p>
+                            <p class="msjAlerta" id="msj"></p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary mb-2">Guardar Cambios</button>
                         <a href="{% url 'core:cambiarClave' %}" class="btn btn-danger">Cambiar Contraseña</a>
                     </div>
                 </div>
@@ -121,8 +122,7 @@
             </div>
         </form>
     </div>
-
-
+    
     {% include 'core/footer.html' %}
         <script src="{% static 'core/js/Varios.js' %}"></script>
 </body>

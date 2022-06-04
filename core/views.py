@@ -5,6 +5,7 @@ from .models import Estatus, Producto, Categoria, Categoria
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from users.models import UserProfile
 #from context_processors import login_user
 
 # Create your views here.
@@ -182,6 +183,34 @@ def msjFooter(request):
     
    
     return redirect(pagAnt)
+
+def editarUsuario(request, id):
+    nombre = request.POST['nombre']
+    apellidoPa = request.POST['apellidoPa']
+    apellidoMa = request.POST['apellidoMa']
+    direccion = request.POST['direccion']
+    telefono = request.POST['telefono']
+
+    # obtener el registro de la base de datos
+    usuario = UserProfile.objects.get(id = id)
+
+    # reemplazar valores en el registro
+    usuario.nombre = nombre
+    usuario.apellidoPa = apellidoPa
+    usuario.apellidoMa = apellidoMa
+    usuario.direccion = direccion
+    usuario.telefono = telefono
+
+    try:
+        foto = request.FILES['fotoInput']
+        usuario.foto = foto
+    except:
+        foto = "No hay cambio"
+
+    #update
+    usuario.save() 
+    messages.success(request,'Cambios Guardados')
+    return redirect('core:cuenta')
 
 
 

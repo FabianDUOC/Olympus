@@ -17,16 +17,16 @@ $(document).ready(function () {
         if (entrar) {
             $("#msjCorreo").html(msj);
             e.preventDefault();
-        }
-        else {
-            
+        } else {
         }
 
     })
 
+    ///[A-Z]/.test(clave)
+
     // FORMULARIO RECUPERAR CONTRASEÑA
     $("#formRecupClave").submit(function (e) {
-        e.preventDefault();
+
         var correo1 = $("#correo1").val();
         var correo2 = $("#correo2").val();
 
@@ -39,30 +39,21 @@ $(document).ready(function () {
         if (correo1.indexOf('@', 0) == -1 || correo1.indexOf('.', 0) == -1 || correo2.indexOf('@', 0) == -1 || correo2.indexOf('.', 0) == -1) {
             msj += "El correo electrónico introducido no es válido <br>"
             entrar = true;
-        }
-
-        if (correo1 != correo2) {
+        } if (correo1 != correo2) {
             msj += "Los correos ingresados deben ser iguales <br>";
             entrar = true;
         }
 
         if (entrar) {
             $("#mensajes").html(msj);
-        }
-        else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Correo de recuperación enviado',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            $("#formRecupClave")[0].reset();
+            e.preventDefault();
+        } else {
         }
     })
 
     // FORMULARIO CAMBIAR CONTRASEÑA
     $("#cambiarClave").submit(function (e) {
-        e.preventDefault();
+
         var clave = $("#claveActual").val();
         var claveNu1 = $("#claveNueva1").val();
         var claveNu2 = $("#claveNueva2").val();
@@ -76,35 +67,32 @@ $(document).ready(function () {
         if (claveNu1.trim().length < 6) {
             msj += "La contraseña nueva de tener al menos 6 caracteres <br>";
             entrar = true;
-        }
-        if (claveNu1 == clave) {
+        } if (!/[A-Z]/.test(claveNu1)) {
+            msj += "La contraseña nueva de tener al menos 1 mayúscula <br>";
+            entrar = true;
+        } if (/[0-9]/.test(claveNu1)) {
+            msj += "La contraseña nueva de tener al menos 1 número <br>";
+            entrar = true;
+        } if (/[ ]/.test(claveNu1)) {
+            msj += "La contraseña nueva no debe tener espacios <br>";
+            entrar = true;
+        } if (claveNu1 == clave) {
             msj += "Las contraseñas nuevas deben ser distinta a la contraseña antigua <br>"
             entrar = true;
-        }
-        if (claveNu1 != claveNu2) {
+        } if (claveNu1 != claveNu2) {
             msj += "Las contraseñas nuevas deben ser iguales <br>"
             entrar = true;
         }
 
-
         if (entrar) {
             $("#mensajes").html(msj);
-        }
-        else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Contraseña cambiada exitósamente',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-            $("#cambiarClave")[0].reset();
+            e.preventDefault();
+        } else {
         }
     })
 
     // FORMNULARIO CONTÁCTANOS
     $("#formContanto").submit(function (e) {
-
 
         var nom = $("#nombre").val();
         var correo = $("#email").val();
@@ -115,12 +103,10 @@ $(document).ready(function () {
         $("#mensajes2").html("");
         $("#msjCorreo").html("");
 
-        if (nom.trim().length < 4 || nom.trim().length > 10) {
+        if (nom.trim().length > 30) {
             msj += "El nombre no tiene la longitud válida <br>";
             entrar = true;
-        }
-
-        if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {
+        } if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {
             $("#msjCorreo").html("El correo electrónico introducido no es válido");
             entrar = true;
         }
@@ -128,8 +114,7 @@ $(document).ready(function () {
         if (entrar) {
             $("#mensajes1").html(msj);
             e.preventDefault();
-        }
-        else {
+        } else {
             $("#mensajes1").html("");
             $("#mensajes2").css({ 'color': 'blue' });
             $("#mensajes2").html("Mensaje enviado exitosamente");
@@ -165,41 +150,33 @@ $(document).ready(function () {
 
         $("#msj").html("");
 
-        if (nom.trim().length < 4 || nom.trim().length > 10) {
+        if (nom.trim().length > 30) {
             $("#msjNom").html("El nombre no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (apellidoPa.trim().length < 4 || apellidoPa.trim().length > 10) {
-            $("#msjApellidoPa").html("El apellido no tiene la longitud válida");
+        } if (/[ ]/.test(apellidoPa)) {
+            $("#msjApellidoPa1").html("El apellido no debe tener espacios");
             entrar = true;
-        }
-
-        if (apellidoMa.trim().length < 4 || apellidoMa.trim().length > 10) {
-            $("#msjApellidoMa").html("El apellido no tiene la longitud válida");
+        } if (apellidoPa.trim().length > 30) {
+            $("#msjApellidoPa2").html("El apellido no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+        } if (/[ ]/.test(apellidoMa)) {
+            $("#msjApellidoMa1").html("El apellido no debe tener espacios");
+            entrar = true;
+        } if (apellidoMa.trim().length > 30) {
+            $("#msjApellidoMa2").html("El apellido no tiene la longitud válida");
+            entrar = true;
+        } if (email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
             $("#msjCorreo").html("El correo electrónico introducido no es válido")
-        }
-
-        if (direcc.trim().length < 4) {
+        } if (direcc.trim().length < 4) {
             $("#msjDireccion").html("La dirección debe tener al menos 4 caracteres");
             entrar = true;
-        }
-
-        if (region == "Escoge tu Región") {
+        } if (region == "Escoge tu Región") {
             $("#msjRegion").html("Seleccionar región")
             entrar = true;
-        }
-
-        if (numTel.trim().length != 11) {
-            $("#msjTel").html("Numero de telefono de 11 dígitos");
+        } if (numTel.trim().length != 9) {
+            $("#msjTel").html("Número de teléfono debe ser de 9 dígitos");
             entrar = true;
-        }
-
-        if (comuna == "Escoge tu Comuna") {
+        } if (comuna == "Escoge tu Comuna") {
             $("#msjComuna").html("Seleccionar comuna")
             entrar = true;
         }
@@ -207,9 +184,16 @@ $(document).ready(function () {
         if (clave1.trim().length < 6) {
             msjClaves += "La contraseña de tener al menos 6 caracteres <br>";
             entrar = true;
-        }
-
-        if (clave1 != clave2) {
+        } if (!/[A-Z]/.test(clave1)) {
+            msjClaves += "La contraseña de tener al menos 1 mayúscula <br>";
+            entrar = true;
+        } if (!/[0-9]/.test(clave1)) {
+            msjClaves += "La contraseña de tener al menos 1 número <br>";
+            entrar = true;
+        } if (/[ ]/.test(clave1)) {
+            msjClaves += "La contraseña no debe tener espacios <br>";
+            entrar = true;
+        } if (clave1 != clave2) {
             msjClaves += "Las contraseñas deben ser iguales";
             entrar = true;
         }
@@ -219,13 +203,12 @@ $(document).ready(function () {
             e.preventDefault();
         }
         else {
-            
+
         }
     })
 
     // FORMULARIO EDITAR CUENTA
     $("#editCuenta").submit(function (e) {
-        e.preventDefault();
 
         var nom = $("#nombre").val();
         var apellidoPa = $("#apellidoPa").val();
@@ -247,17 +230,17 @@ $(document).ready(function () {
 
         $("#msj").html("");
 
-        if (nom.trim().length < 4 || nom.trim().length > 10) {
+        if (nom.trim().length > 30) {
             $("#msjNom").html("El nombre no tiene la longitud válida");
             entrar = true;
         }
 
-        if (apellidoPa.trim().length < 4 || apellidoPa.trim().length > 10) {
+        if (aapellidoPa.trim().length > 30) {
             $("#msjApellidoPa").html("El apellido no tiene la longitud válida");
             entrar = true;
         }
 
-        if (apellidoMa.trim().length < 4 || apellidoMa.trim().length > 10) {
+        if (apellidoMa.trim().length > 30) {
             $("#msjApellidoMa").html("El apellido no tiene la longitud válida");
             entrar = true;
         }
@@ -272,7 +255,7 @@ $(document).ready(function () {
             entrar = true;
         }
 
-        if (numTel.trim().length != 11) {
+        if (numTel.trim().length != 9) {
             $("#msjTel").html("Numero de telefono de 11 dígitos");
             entrar = true;
         }
@@ -283,14 +266,9 @@ $(document).ready(function () {
         }
 
         if (entrar) {
+            e.preventDefault();
         }
         else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Se han guardado los cambios',
-                showConfirmButton: false,
-                timer: 1500
-              })
         }
     })
 
@@ -315,32 +293,22 @@ $(document).ready(function () {
 
         let entrar = false;
 
-        if (nombre.trim().length < 4 || nombre.trim().length > 15) {
+        if (nombre.trim().length < 4 || nombre.trim().length > 30) {
             $("#msjNombre").html("El nombre de producto no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (precio == 0) {
+        } if (precio == 0) {
             $("#msjPrecio").html("Precio debe ser mayor a 0")
             entrar = true;
-        }
-
-        if (desCorta.trim().length < 4 || desCorta.trim().length > 20) {
+        } if (desCorta.trim().length < 4 || desCorta.trim().length > 30) {
             $("#msjCorta").html("La descripción no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (desLarga.trim().length < 10 || desLarga.trim().length > 200) {
+        } if (desLarga.trim().length < 10 || desLarga.trim().length > 200) {
             $("#msjDetallada").html("La descripción no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (cantidad == 0) {
+        } if (cantidad == 0) {
             $("#msjCantidad").html("Cantidad debe ser mayor a 0")
             entrar = true;
-        }
-
-        if (categoria == "Categoría") {
+        } if (categoria == "Categoría") {
             $("#msjCategorias").html("Debe seleccionar una categoría")
             entrar = true;
         }
@@ -349,7 +317,7 @@ $(document).ready(function () {
             e.preventDefault();
         }
         else {
-        
+
         }
     })
 
@@ -374,32 +342,22 @@ $(document).ready(function () {
 
         let entrar = false;
 
-        if (nombre.trim().length < 4 || nombre.trim().length > 15) {
+        if (nombre.trim().length < 4 || nombre.trim().length > 30) {
             $("#msjNombre").html("El nombre de producto no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (precio == 0) {
+        } if (precio == 0) {
             $("#msjPrecio").html("Precio debe ser mayor a 0")
             entrar = true;
-        }
-
-        if (desCorta.trim().length < 4 || desCorta.trim().length > 20) {
+        } if (desCorta.trim().length < 4 || desCorta.trim().length > 30) {
             $("#msjCorta").html("La descripción no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (desLarga.trim().length < 10 || desLarga.trim().length > 200) {
+        } if (desLarga.trim().length < 10 || desLarga.trim().length > 200) {
             $("#msjDetallada").html("La descripción no tiene la longitud válida");
             entrar = true;
-        }
-
-        if (cantidad == 0) {
+        } if (cantidad == 0) {
             $("#msjCantidad").html("Cantidad debe ser mayor a 0")
             entrar = true;
-        }
-
-        if (categoria == "Categoría") {
+        } if (categoria == "Categoría") {
             $("#msjCategorias").html("Debe seleccionar una categoría")
             entrar = true;
         }
@@ -408,7 +366,7 @@ $(document).ready(function () {
             e.preventDefault();
         }
         else {
-        
+
         }
     })
 
@@ -421,18 +379,18 @@ $(document).ready(function () {
             title: 'Mensaje enviado satisfactoriamente',
             showConfirmButton: false,
             timer: 1500
-          })
+        })
         $("#formMensaje")[0].reset();
     })
 
     // FORMULARIO FOOTER
-    $("#suscripcion").submit(function(e){
-        
+    $("#suscripcion").submit(function (e) {
+
 
         var correo = $("#emailF").val();
 
         $("#mensajes").html("")
-        
+
         let entrar = false;
 
         if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {

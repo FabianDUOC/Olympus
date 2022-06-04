@@ -7,7 +7,8 @@ class UserLoginForm(forms.Form):
             attrs={
                 'id': 'loginEmail',
                 'type': 'email',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Correo Electrónico'
             }
         )
     )
@@ -17,6 +18,7 @@ class UserLoginForm(forms.Form):
             'id': 'loginPassword',
             'type': 'password',
             'class': 'form-control',
+            'placeholder': 'Ingresar Contraseña'
         })
     )
 
@@ -28,7 +30,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'signupEmail',
                 'type': 'email',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Correo Electrónico'
             }
         )
     )
@@ -50,7 +53,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'apellidoPa',
                 'type': 'text',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Primer Apellido'
             }
         ))
     
@@ -60,7 +64,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'apellidoMa',
                 'type': 'text',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Segundo Apellido'
             }
         ))
 
@@ -70,7 +75,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'direccion',
                 'type': 'text',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Dirección'
             }
         ))
 
@@ -79,7 +85,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'telefono',
                 'type': 'number',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Número de Teléfono'
             }
         ))
 
@@ -88,7 +95,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'clave1',
                 'type': 'password',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Ingresar Contraseña'
             }
         ))
 
@@ -97,7 +105,8 @@ class UserSignUpForm(forms.Form):
             attrs={
                 'id': 'clave2',
                 'type': 'password',
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Repetir Contraseña'
             }
         ))
 
