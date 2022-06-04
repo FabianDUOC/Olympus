@@ -1,4 +1,5 @@
 from django import forms
+from users.models import Comuna, Region
 
 
 class UserLoginForm(forms.Form):
@@ -77,6 +78,24 @@ class UserSignUpForm(forms.Form):
                 'type': 'text',
                 'class': 'form-control',
                 'placeholder': 'Ingresar Dirección'
+            }
+        ))
+
+    region = forms.ModelChoiceField( 
+        queryset=Region.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'id': 'region',
+                'class': 'form-select',
+            }
+        ))
+
+    comuna = forms.ModelChoiceField( 
+        queryset=Comuna.objects.none(),
+        widget=forms.Select(
+            attrs={
+                'id': 'comuna',
+                'class': 'form-select',
             }
         ))
 

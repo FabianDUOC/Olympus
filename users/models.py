@@ -24,6 +24,14 @@ class Comuna(models.Model):
     def __str__(self):
         return self.nombre
 
+class direccion(models.Model):
+    idDireccion = models.AutoField(primary_key=True,verbose_name="Código de la Dirección")
+    nombre = models.CharField(max_length=50, verbose_name="Nombre de la Dirección",null=False, blank=False)
+    comuna = models.ForeignKey(Comuna,on_delete= models.CASCADE, verbose_name="Comuna de pertenencia")
+
+    def __str__(self):
+        return self.nombre
+
 
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
@@ -33,7 +41,7 @@ class CustomAccountManager(BaseUserManager):
     def create_user(self, email, nombre, apellidoPa, apellidoMa, direccion, telefono, password, **other_fields):
 
         if not email:
-            raise ValueError(_('You must provide an email address'))
+            raise ValueError(_('Debe ingresar un correo'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, nombre=nombre,

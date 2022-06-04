@@ -176,7 +176,7 @@ $(document).ready(function () {
         } if (numTel.trim().length != 9) {
             $("#msjTel").html("Número de teléfono debe ser de 9 dígitos");
             entrar = true;
-        } if (comuna == "Escoge tu Comuna") {
+        } if (comuna == "---------") {
             $("#msjComuna").html("Seleccionar comuna")
             entrar = true;
         }
@@ -260,7 +260,7 @@ $(document).ready(function () {
             entrar = true;
         }
 
-        if (comuna == "Escoge tu Comuna") {
+        if (comuna == "---------") {
             $("#msjComuna").html("Seleccionar comuna")
             entrar = true;
         }

@@ -90,6 +90,7 @@
                 <label for="region">Región</label>
                 <div class="input-group mb-3">
                   {{ signupForm.region }}
+
                   <!--
                   <select class="form-select" id="region" name="region" required>
                     <option selected>Escoge tu Región</option>
@@ -145,7 +146,7 @@
       </div>
     </div>
   </div>
-  <!-- Script para combobox anidado de comunas -->
+
   <script>
     $(function(){
       $('select[name="region"]').on('change',function(){
@@ -176,7 +177,6 @@
       });
     });
   </script>
-
 
   {% include 'core/footer.html' %}
 </body>

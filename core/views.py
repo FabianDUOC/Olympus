@@ -1,11 +1,17 @@
 from email import message
 from multiprocessing import context
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Estatus, Producto, Categoria, Categoria
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from users.models import UserProfile
+
+from users.models import Comuna, Region, UserProfile
+from django.views.generic import TemplateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 #from context_processors import login_user
 
 # Create your views here.
@@ -21,9 +27,6 @@ def cambiarClave(request):
 def recuperarClave(request):
     return render(request,'core/recuperarClave.html')
 
-def registro(request):
-    return render(request,'core/registro.html')
-
 def categoriaProducto(request):
     return render(request,'core/categoriaProducto.html')
 
@@ -31,9 +34,6 @@ def producto(request, id):
     producto = Producto.objects.get(idProducto = id)
     contexto = {"producto":producto}  
     return render(request,'core/producto.html', contexto)
-
-def editarCuenta(request):
-    return render(request,'core/editarCuenta.html')
 
 def agregarProducto(request):
     categorias = Categoria.objects.all()
@@ -210,4 +210,39 @@ def editarUsuario(request, id):
     return redirect('core:cuenta')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class registroFormView(TemplateView):
+    template_name = 'core/registro.html'
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'buscar_comuna_id':
+                data = []
+                for i in Comuna.objects.filter(region= request.POST['id']):
+                    data.append({'id': i.idComuna, 'nombre': i.nombre })
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class editarCuentaFormView(TemplateView):
+    template_name = 'core/editarCuenta.html'
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'buscar_comuna_id':
+                data = []
+                for i in Comuna.objects.filter(region= request.POST['id']):
+                    data.append({'id': i.idComuna, 'nombre': i.nombre })
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
 

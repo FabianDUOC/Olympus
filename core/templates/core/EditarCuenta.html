@@ -84,24 +84,30 @@
                             <div class="col-sm-12 col-md-6">
                                 <label for="region">Región</label>
                                 <div class="input-group mb-3">
+                                    {{ signupForm.region }}
+                                    <!--
                                     <select class="form-select" id="region" name="region" required>
                                         <option selected>Escoge tu Región</option>
                                         <option value="1">Región Metropolitana</option>
                                         <option value="2">Valparaíso</option>
                                         <option value="3">Coquimbo</option>
                                     </select>
+                                    -->
                                 </div>
                                 <p class="msjAlerta" id="msjRegion"></p>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="comuna">Comuna</label>
                                 <div class="input-group mb-3">
+                                    {{ signupForm.comuna }}
+                                    <!--
                                     <select class="form-select" id="comuna" name="comuna" required>
                                         <option selected>Escoge tu Comuna</option>
                                         <option value="1">Recoleta</option>
                                         <option value="2">Huechuraba</option>
                                         <option value="3">Quilicura</option>
                                     </select>
+                                    -->
                                 </div>
                                 <p class="msjAlerta" id="msjComuna"></p>
                             </div>
@@ -122,6 +128,38 @@
             </div>
         </form>
     </div>
+    <!-- Script para combobox anidado de comunas -->
+    <script>
+        $(function(){
+        $('select[name="region"]').on('change',function(){
+            var id = $(this).val();
+            var select_comunas = $('select[name="comuna"]');
+            var options =  '<option values="">---------</option>';
+            $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: {
+                'action': 'buscar_comuna_id',
+                'id': id
+            },
+            dataType: 'json',
+            }).done(function(data){
+            console.log(data);
+            if (!data.hasOwnProperty('error')) {
+                $.each(data,function(key, value){
+                options+='<option values="'+ value.id +'">'+ value.nombre +'</option>';
+                });
+                return false;
+            }
+            message_error(data.error);
+            }).fail(function(jqXHR, textStatus, errorThrown){
+            }).always(function(data) {
+            select_comunas.html(options);
+            });
+        });
+        });
+    </script>
+        
     
     {% include 'core/footer.html' %}
         <script src="{% static 'core/js/Varios.js' %}"></script>
