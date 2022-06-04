@@ -175,9 +175,6 @@ def msjFooter(request):
     rec = request.POST['emailF']
     receptor = [rec]
     pagAnt =request.POST['pagAnt']
-    print('aaaaaaaaaaaaaaaa')
-    print(pagAnt)
-    print(receptor)
     send_mail(asunto, mensaje, emisor, receptor)
     messages.success(request,'Suscripcion Realizada')
     

@@ -3,6 +3,7 @@
 
 {% block catalogo %}
 <div class="container-fluid">
+  <div style="float:right;">{% include "core/widget.html" %}</div>
   <div class="row row-cols-2 row-cols-md-4 mt-2 mb-4 gy-3">
     {% for p in poleras %}
     <div class="col">
@@ -20,7 +21,7 @@
           <h5 class="card-title">{{ p.nombreProducto }}</h5>
           <p class="card-text">{{ p.descCorta }}</p>
           <p class="card-text" style="color: rgb(211, 20, 20); font-size: 150%;">${{ p.precio }}</p>
-          <a href="#" class="btn btn-primary">Agregar al Carro</a>
+          <a href="{% url 'carrito:agregar_producto' p.idProducto %}" class="btn btn-primary">Agregar al Carro</a>
           <a href="{% url 'core:editarProducto' p.idProducto %}" class="btn btn-primary">Editar</a>
           <a href="#" class="btn btn-danger">Eliminar</a>
         </div>
