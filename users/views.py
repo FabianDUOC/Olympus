@@ -33,7 +33,6 @@ def signup_view(request):
         nombre = signup_form.cleaned_data.get('nombre')
         apellidoPa = signup_form.cleaned_data.get('apellidoPa')
         apellidoMa = signup_form.cleaned_data.get('apellidoMa')
-        direccion = signup_form.cleaned_data.get('direccion')
         telefono = signup_form.cleaned_data.get('telefono')
         password = signup_form.cleaned_data.get('password')
         try:
@@ -42,7 +41,6 @@ def signup_view(request):
                 nombre=nombre,
                 apellidoPa=apellidoPa,
                 apellidoMa=apellidoMa,
-                direccion=direccion,
                 telefono=telefono,
                 password=make_password(password),
                 is_active=True
