@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import editarCuentaFormView, index, iniciarSesion, cambiarClave, recuperarClave, categoriaProducto, producto, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta, contacto, carrito, editarProducto, editarP, eliminarProducto, enviarCon, msjFooter, editarUsuario, registroFormView
+from .views import cuentaView, editarCuentaFormView, index, iniciarSesion, cambiarClave, recuperarClave, categoriaProducto, producto, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta, contacto, carrito, editarProducto, editarP, eliminarProducto, enviarCon, msjFooter, editarUsuario, registroFormView
 
 app_name = 'core'
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path( 'catalogoZapatillas', catalogoZapatillas, name="catalogoZapatillas"),
     path( 'catalogoPolerones', catalogoPolerones, name="catalogoPolerones"),
     path( 'catalogoChaquetas', catalogoChaquetas, name="catalogoChaquetas"),
-    path( 'cuenta', cuenta, name="cuenta"),
+    path( 'cuenta', cuentaView.as_view(), name="cuenta"),
     path( 'editarCuenta', editarCuentaFormView.as_view(), name="editarCuenta"),
     path( 'editarUsuario/<int:id>', editarUsuario, name="editarUsuario"),
     path( 'contacto', contacto, name="contacto"),

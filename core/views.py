@@ -1,12 +1,12 @@
 from email import message
 from multiprocessing import context
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import Estatus, Producto, Categoria, Categoria
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from users.models import UserProfile
+from users.models import Direccion, UserProfile
 
 from users.models import Comuna, Region, UserProfile
 from django.views.generic import TemplateView
@@ -86,9 +86,6 @@ def catalogoZapatillas(request):
     zapatillas = Producto.objects.filter(categoria = id_categoria, stock__gte = 1, estatus=1) #Seleccionar todas las zapatillas
     contexto = {"zapatillas":zapatillas}
     return render(request,'core/catalogoZapatillas.html', contexto)
-
-def cuenta(request):
-    return render(request,'core/cuenta.html')
 
 def carrito(request):
     return render(request,'core/carrito.html')
@@ -187,25 +184,42 @@ def editarUsuario(request, id):
     apellidoMa = request.POST['apellidoMa']
     direccion = request.POST['direccion']
     telefono = request.POST['telefono']
-
-    # obtener el registro de la base de datos
-    usuario = UserProfile.objects.get(id = id)
-
-    # reemplazar valores en el registro
-    usuario.nombre = nombre
-    usuario.apellidoPa = apellidoPa
-    usuario.apellidoMa = apellidoMa
-    usuario.direccion = direccion
-    usuario.telefono = telefono
+    # direc = request.POST['direccion']
+    # comuna = request.POST['comuna']
 
     try:
+        # obtener el registro de la base de datos
+        usuario = UserProfile.objects.get(id = id)
+        # print('*************************************************')
+        # print('*************************************************')
+        # print(type(usuario))
+        # email = usuario.email
+      
+        # direccion = Direccion.object.get(email = email)
+        
+        # comuna = Comuna.objects.get(nombre = comuna)
+       
+        # reemplazar valores en el registro
+        usuario.nombre = nombre
+        usuario.apellidoPa = apellidoPa
+        usuario.apellidoMa = apellidoMa
+        usuario.direccion = direccion
+        usuario.telefono = telefono
         foto = request.FILES['fotoInput']
         usuario.foto = foto
+
+        #direccion.nombre = direc
+        #direccion.comuna = comuna.idComuna
+
     except:
         foto = "No hay cambio"
 
     #update
-    usuario.save() 
+    print('15 *************************************************')
+    usuario.save()
+    print('16 *************************************************')
+    #direccion.save()
+    print('8 *************************************************') 
     messages.success(request,'Cambios Guardados')
     return redirect('core:cuenta')
 
@@ -225,7 +239,7 @@ class registroFormView(TemplateView):
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
-            data['error'] = str(e)
+            data['error'] = 'Ha ocurrido un error'
         return JsonResponse(data, safe=False)
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -240,9 +254,42 @@ class editarCuentaFormView(TemplateView):
                 data = []
                 for i in Comuna.objects.filter(region= request.POST['id']):
                     data.append({'id': i.idComuna, 'nombre': i.nombre })
+                return JsonResponse(data, safe=False)
+            
+            if action == 'buscar_direccion':
+                data = []
+                direccion = Direccion.objects.get(email = request.POST['email'])
+                comuna = Comuna.objects.get(nombre = direccion.comuna)
+                region = Region.objects.get(nombre = comuna.region)
+                return JsonResponse({'direccionU':direccion.nombre, 'comunaU':comuna.idComuna, 'regionU':region.idRegion })
             else:
                 data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
+                return JsonResponse(data, safe=False)
+        except:
+            data['error'] = 'Ha ocurrido un error'
+            return JsonResponse(data, safe=False)
 
+
+def cuenta(request):
+    return render(request,'core/cuenta.html')
+
+@method_decorator(csrf_exempt, name='dispatch')
+class cuentaView(TemplateView):
+    template_name = 'core/cuenta.html'
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'buscar_direccion':
+                data = []
+                direccion = Direccion.objects.get(email = request.POST['email'])
+                comuna = Comuna.objects.get(nombre = direccion.comuna)
+                region = Region.objects.get(nombre = comuna.region)
+                return JsonResponse({'direccionU':direccion.nombre, 'comunaU':comuna.nombre, 'regionU':region.nombre })
+            else:
+                data['error'] = 'Ha ocurrido un error'
+                return JsonResponse(data, safe=False)
+        except:
+            data['error'] = 'Ha ocurrido un error'
+            return JsonResponse(data, safe=False)

@@ -76,7 +76,7 @@
 
                         <div class="mb-3 form-group">
                             <label for="direccion">Dirección</label>
-                            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion" placeholder="Ingresar Dirección" value="{{ user.direccion }}" required>
+                            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion" placeholder="Ingresar Dirección" value="" required>
                             <p class="msjAlerta" id="msjDireccion"></p>
                         </div>
                         
@@ -84,7 +84,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <label for="region">Región</label>
                                 <div class="input-group mb-3">
-                                    {{ signupForm.region }}
+                                    {{ direcForm.region }}
                                     <!--
                                     <select class="form-select" id="region" name="region" required>
                                         <option selected>Escoge tu Región</option>
@@ -99,7 +99,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <label for="comuna">Comuna</label>
                                 <div class="input-group mb-3">
-                                    {{ signupForm.comuna }}
+                                    {{ direcForm.comuna }}
                                     <!--
                                     <select class="form-select" id="comuna" name="comuna" required>
                                         <option selected>Escoge tu Comuna</option>
@@ -130,6 +130,29 @@
     </div>
     <!-- Script para combobox anidado de comunas -->
     <script>
+        $(function() {
+        var email = $('#email').val();
+        
+        $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: {
+            'action': 'buscar_direccion',
+            'email': email
+            },
+            dataType: 'json',
+            }).done(function(data){
+            if (!data.hasOwnProperty('error')) {
+                $('#direccion').attr('value',data.direccionU)
+                $('#region').val(data.regionU)         
+            }
+            message_error(data.error);
+            }).fail(function(jqXHR, textStatus, errorThrown){
+            }).always(function(data) {
+            select_comunas.html(options);
+            });
+        });
+
         $(function(){
         $('select[name="region"]').on('change',function(){
             var id = $(this).val();
@@ -158,7 +181,8 @@
             });
         });
         });
-    </script>
+
+    </script>  
         
     
     {% include 'core/footer.html' %}

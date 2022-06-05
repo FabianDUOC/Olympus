@@ -5,6 +5,8 @@ from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
+from users.models import Comuna, Direccion, UserProfile
+
 from .forms import UserLoginForm, UserSignUpForm
 
 
@@ -33,16 +35,18 @@ def signup_view(request):
         nombre = signup_form.cleaned_data.get('nombre')
         apellidoPa = signup_form.cleaned_data.get('apellidoPa')
         apellidoMa = signup_form.cleaned_data.get('apellidoMa')
-        direccion = signup_form.cleaned_data.get('direccion')
         telefono = signup_form.cleaned_data.get('telefono')
         password = signup_form.cleaned_data.get('password')
+        direccion = request.POST['direccion']
+        comuna = request.POST['comuna']
         try:
+            comuna2 = Comuna.objects.get(nombre = comuna)
+            Direccion.objects.create(nombre = direccion, comuna=comuna2,email=email)
             user = get_user_model().objects.create(
                 email=email,
                 nombre=nombre,
                 apellidoPa=apellidoPa,
                 apellidoMa=apellidoMa,
-                direccion=direccion,
                 telefono=telefono,
                 password=make_password(password),
                 is_active=True
@@ -63,4 +67,5 @@ def logout_view(request):
 @login_required(login_url='core:index')
 def profile_view(request):
     return render(request, 'core:cuenta')
+
 

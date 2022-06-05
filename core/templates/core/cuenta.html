@@ -45,9 +45,7 @@
             <h5>
               Correo Electrónico
             </h5>
-            <p>
-              {{ user.email }}
-            </p>
+            <p id="correoUsuario" name="correoUsuario">{{ user.email }}</p>
             {% if user.is_staff == 1 %}
               <h5>
                 Cargo
@@ -59,8 +57,8 @@
             <h5>
               Dirección
             </h5>
-            <p>
-              {{ user.direccion }}
+            <p id="direcUsuario" name="direcUsuario">
+              {{ direcUser.direccion }}
             </p>
             <h5>
               Número
@@ -73,8 +71,32 @@
         </div>
       </div>
     </div>
-
   </div>
+
+  <script>
+    $(document).ready(function () {
+      var email = $('#correoUsuario').text();
+      
+      $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {
+          'action': 'buscar_direccion',
+          'email': email
+        },
+        dataType: 'json',
+        }).done(function(data){
+          if (!data.hasOwnProperty('error')) {
+            direccion = data.direccionU + ', ' + data.comunaU + ', ' + data.regionU
+            $('#direcUsuario').html(direccion)          
+          }
+          message_error(data.error);
+        }).fail(function(jqXHR, textStatus, errorThrown){
+        }).always(function(data) {
+          select_comunas.html(options);
+        });
+      });
+  </script>
 
 
   {% include 'core/footer.html' %}
