@@ -214,12 +214,9 @@ def editarUsuario(request, id):
     except:
         foto = "No hay cambio"
 
-    #update
-    print('15 *************************************************')
+    #update de los campos
     usuario.save()
-    print('16 *************************************************')
-    #direccion.save()
-    print('8 *************************************************') 
+    # direccion.save()
     messages.success(request,'Cambios Guardados')
     return redirect('core:cuenta')
 
