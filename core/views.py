@@ -184,22 +184,12 @@ def editarUsuario(request, id):
     apellidoMa = request.POST['apellidoMa']
     direccion = request.POST['direccion']
     telefono = request.POST['telefono']
-    # direc = request.POST['direccion']
-    # comuna = request.POST['comuna']
+    direc = request.POST['direccion']
+    comuna = request.POST['comuna']
 
     try:
-        # obtener el registro de la base de datos
         usuario = UserProfile.objects.get(id = id)
-        # print('*************************************************')
-        # print('*************************************************')
-        # print(type(usuario))
-        # email = usuario.email
-      
-        # direccion = Direccion.object.get(email = email)
-        
-        # comuna = Comuna.objects.get(nombre = comuna)
-       
-        # reemplazar valores en el registro
+    
         usuario.nombre = nombre
         usuario.apellidoPa = apellidoPa
         usuario.apellidoMa = apellidoMa
@@ -208,15 +198,32 @@ def editarUsuario(request, id):
         foto = request.FILES['fotoInput']
         usuario.foto = foto
 
-        #direccion.nombre = direc
-        #direccion.comuna = comuna.idComuna
-
     except:
         foto = "No hay cambio"
 
-    #update de los campos
+    #update de los campos de usuario     
     usuario.save()
-    # direccion.save()
+
+    try:
+        direccionUsuario = Direccion.objects.get(idUsuario = id)
+        print(direccionUsuario)
+        print(type(direccionUsuario))
+        print(direccionUsuario.nombre)
+        print(direccionUsuario.idUsuario)
+        print(direccionUsuario.email)
+        print(direccionUsuario.comuna)
+        comuna1 = Comuna.objects.get(nombre = comuna)
+        print(comuna1)
+        print(type(comuna1))
+        comuna2 =comuna1.idComuna
+        print(comuna2)
+        print(type(comuna2))
+        direccionUsuario.nombre = direc
+        direccionUsuario.comuna = comuna1
+    except:
+        None
+    #update de los campos de direccion  
+    direccionUsuario.save()
     messages.success(request,'Cambios Guardados')
     return redirect('core:cuenta')
 

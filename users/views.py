@@ -40,8 +40,6 @@ def signup_view(request):
         direccion = request.POST['direccion']
         comuna = request.POST['comuna']
         try:
-            comuna2 = Comuna.objects.get(nombre = comuna)
-            Direccion.objects.create(nombre = direccion, comuna=comuna2,email=email)
             user = get_user_model().objects.create(
                 email=email,
                 nombre=nombre,
@@ -51,6 +49,9 @@ def signup_view(request):
                 password=make_password(password),
                 is_active=True
             )
+            idUser = UserProfile.objects.latest('id')
+            comuna2 = Comuna.objects.get(nombre = comuna)
+            Direccion.objects.create(nombre = direccion, comuna=comuna2,idUsuario=idUser.id,email=email)
             login(request, user)
             return redirect('core:cuenta')
 

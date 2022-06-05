@@ -28,6 +28,7 @@ class Direccion(models.Model):
     idDireccion = models.AutoField(primary_key=True,verbose_name="Código de la Dirección")
     nombre = models.CharField(max_length=50, verbose_name="Nombre de la Dirección",null=False, blank=False)
     comuna = models.ForeignKey(Comuna,on_delete= models.CASCADE, verbose_name="Comuna de pertenencia")
+    idUsuario = models.IntegerField(unique=True)
     email = models.EmailField(_('email address'), unique=True)
 
     def __str__(self):
