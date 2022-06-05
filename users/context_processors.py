@@ -8,5 +8,5 @@ def login_form(request):
     return {
         'loginForm': login_form,
         'signupForm': signup_form,
-        'direcForm': direc_form,
+        'direcForm': direc_form
     }
