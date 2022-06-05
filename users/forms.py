@@ -70,6 +70,35 @@ class UserSignUpForm(forms.Form):
             }
         ))
 
+    direccion = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'id': 'direccion',
+                'type': 'text',
+                'class': 'form-control',
+                'placeholder': 'Ingresar Dirección'
+            }
+        ))
+
+    region = forms.ModelChoiceField( 
+        queryset=Region.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'id': 'region',
+                'class': 'form-select',
+            }
+        ))
+
+    comuna = forms.ModelChoiceField( 
+        queryset=Comuna.objects.none(),
+        widget=forms.Select(
+            attrs={
+                'id': 'comuna',
+                'class': 'form-select',
+            }
+        ))
+
     telefono = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -105,33 +134,3 @@ class UserSignUpForm(forms.Form):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Las Contraseñas no coinciden')
         return cd['password2']
-
-class DirecForm(forms.Form):
-    region = forms.ModelChoiceField( 
-        queryset=Region.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'id': 'region',
-                'class': 'form-select',
-            }
-        ))
-
-    comuna = forms.ModelChoiceField( 
-        queryset=Comuna.objects.none(),
-        widget=forms.Select(
-            attrs={
-                'id': 'comuna',
-                'class': 'form-select',
-            }
-        ))
-    
-    direccion = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={
-                'id': 'direccion',
-                'type': 'text',
-                'class': 'form-control',
-                'placeholder': 'Ingresar Dirección'
-            }
-        ))
