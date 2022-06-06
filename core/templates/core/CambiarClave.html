@@ -36,26 +36,33 @@
   <!--Formulario-->
   <div class="container py-3 mb-5">
     <div class="row py-5">
-      <form class="col-md-9 m-auto" action="" method="post" id="cambiarClave">
+      
+      <form class="col-md-9 m-auto" action="{% url 'users:changePassword' user.id %}" method="POST" id="cambiarClave">
+      {% csrf_token %}
+
         <div class="mb-3">
           <label for="claveActual">Contraseña Actual</label>
           <input type="password" class="form-control mt-1 mb-2" name="claveActual" id="claveActual"
             placeholder="Ingresar Contraseña Actual" required>
         </div>
+
         <div class="mb-3">
           <label for="claveNueva1">Contraseña Nueva</label>
           <input type="password" class="form-control mt-1 mb-2" name="claveNueva1" id="claveNueva1"
             placeholder="Ingresar Contraseña Nueva" required>
         </div>
+
         <div class="mb-3">
           <label for="claveNueva2">Repetir Contraseña Nueva</label>
           <input type="password" class="form-control mt-1 mb-2" name="claveNueva2" id="claveNueva2"
             placeholder="Repetir Contraseña Nueva" required>
         </div>
+
         <div class="d-grid gap-3">
           <p class="msjAlerta" id="mensajes"></p>
           <button type="submit" button type="button" class="btn btn-primary ">Guardar</button>
         </div>
+
       </form>
     </div>
   </div>

@@ -70,3 +70,21 @@ def profile_view(request):
     return render(request, 'core:cuenta')
 
 
+@login_required(login_url='core:index')
+def profile_change_password(request, id):
+    u = UserProfile.objects.get(id = id)
+    claveActual = request.POST['claveActual']
+    claveANu1 = request.POST['claveNueva1']
+    u.set_password(claveANu1)
+    u.save()
+    user = authenticate(request, email=u.email, password=claveANu1)
+    if user is not None:
+        login(request, user)
+        messages.success(request, 'Contraseña Actualizada')
+        return redirect('core:cuenta')
+    else:
+        messages.warning(request, 'Ha ocurrido un error')
+        return redirect('core:iniciarSesion')
+        
+
+
