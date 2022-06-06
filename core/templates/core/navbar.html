@@ -49,6 +49,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'core:contacto' %}">CONTACTO</a>
           </li>
+          {% if user.is_authenticated and user.is_staff == 0 %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               CARRITO
@@ -58,6 +59,7 @@
               <li><a class="mx-5 btn btn-primary" href="{% url 'core:carrito' %}">Ver Carrito</a></li>
             </ul>
           </li>
+          {% endif %}
           {% if user.is_authenticated and user.is_staff == 1 %}
             <li class="nav-item">
               <a class="nav-link text-nowrap" href="{% url 'core:agregarProducto' %}">AGREGAR PRODUCTO</a>

@@ -71,7 +71,7 @@
                     <div class="form-group">
                         <label for="categoria">Seleccionar Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option selected disabled>Categoría</option>
+                            <option selected>Categoría</option>
                             {% for c in categoria_p %}
                             <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
                             {% endfor %}

@@ -70,9 +70,12 @@
                     <div class="form-group">
                         <label for="categoria">Seleccionar Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option selected disabled>Categoría</option>
                             {% for c in categoria_p %}
-                            <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
+                                {% if c.idCategoria == producto.categoria.idCategoria %}
+                                    <option selected value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
+                                {% else %}
+                                    <option value="{{ c.idCategoria }}">{{ c.nombreC }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                         <p class="msjAlerta" id="msjCategorias"></p>

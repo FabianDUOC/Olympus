@@ -312,6 +312,7 @@ $(document).ready(function () {
             $("#msjCategorias").html("Debe seleccionar una categoría")
             entrar = true;
         }
+        
 
         if (entrar) {
             e.preventDefault();

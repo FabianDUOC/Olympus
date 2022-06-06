@@ -120,22 +120,21 @@ def editarP(request, id):
 
     categoria = request.POST['categoria']
 
+    try:
 
-
-    categoria2 = Categoria.objects.get(idCategoria = categoria)
+        categoria2 = Categoria.objects.get(idCategoria = categoria)
 
     # obtener el registro de la base de datos
-    producto = Producto.objects.get(idProducto = id)
+        producto = Producto.objects.get(idProducto = id)
 
     # reemplazar valores en el registro
-    producto.nombreProducto = nombre
-    producto.descCorta = descripcionC
-    producto.descLarga = descripcionL
-    producto.precio = precio
-    producto.stock = stock
-    producto.categoria = categoria2
+        producto.nombreProducto = nombre
+        producto.descCorta = descripcionC
+        producto.descLarga = descripcionL
+        producto.precio = precio
+        producto.stock = stock
+        producto.categoria = categoria2
 
-    try:
         foto = request.FILES['fotoInput']
         producto.foto = foto
     except:
@@ -196,6 +195,8 @@ def editarUsuario(request, id):
         usuario.direccion = direccion
         usuario.telefono = telefono
         foto = request.FILES['fotoInput']
+        print("*********")
+        print(foto)
         usuario.foto = foto
 
     except:

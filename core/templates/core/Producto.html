@@ -29,10 +29,13 @@
               Disponibilidad: {{ producto.stock }}
             </h5>
             <b>Seleccionar Cantidad</b>
+            <form action="{% url 'carrito:agregar_producto_varios' producto.idProducto %}" method="POST">
+            {% csrf_token %} 
             <div class="form-outline">
-              <input id="form1" min="1" name="Cantidad" value="1" type="number" class="form-control mb-3" />
+            <input id="formCantidad" min="1" max="{{ producto.stock }}" name="formCantidad" value="1" type="number" class="form-control mb-3" />
             </div>
-            <a href="" class="btn btn-primary">Agregar al Carro</a>
+            <button type="submit" class="btn btn-primary ">Agregar al Carro</button>
+          </form>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ class Carrito:
             }
         else:
             for key, value in self.carrito.items():
-                if key==str(producto.idProducto):
+                if key==str(producto.idProducto) and producto.stock> value["cantidad"]:
                     value["cantidad"]=value["cantidad"]+1
                     value["precio"]=int(value["precio"])+producto.precio
                     break
