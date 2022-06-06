@@ -181,18 +181,15 @@ def editarUsuario(request, id):
     nombre = request.POST['nombre']
     apellidoPa = request.POST['apellidoPa']
     apellidoMa = request.POST['apellidoMa']
-    direccion = request.POST['direccion']
     telefono = request.POST['telefono']
-    direc = request.POST['direccion']
-    comuna = request.POST['comuna']
 
     try:
         usuario = UserProfile.objects.get(id = id)
         usuario.nombre = nombre
         usuario.apellidoPa = apellidoPa
         usuario.apellidoMa = apellidoMa
-        usuario.direccion = direccion
         usuario.telefono = telefono
+
         foto = request.FILES['fotoInput']
         usuario.foto = foto
 
@@ -202,15 +199,16 @@ def editarUsuario(request, id):
     usuario.save()
 
     try:
+        direc = request.POST['direccion']
+        comuna = request.POST['comuna']
         direccionUsuario = Direccion.objects.get(idUsuario = id)
         comuna1 = Comuna.objects.get(nombre = comuna)
-        comuna2 =comuna1.idComuna
         direccionUsuario.nombre = direc
         direccionUsuario.comuna = comuna1
+        direccionUsuario.save()
     except:
         None
     #update de los campos de direccion  
-    direccionUsuario.save()
     messages.success(request,'Cambios Guardados')
     return redirect('core:cuenta')
 

@@ -49,7 +49,7 @@
               Correo Electrónico
             </h5>
             <p id="correoUsuario" name="correoUsuario">{{ user.email }}</p>
-            {% if user.is_staff == 1 %}
+            {% if user.is_authenticated and user.is_staff == 1 %}
               <h5>
                 Cargo
               </h5>
@@ -57,12 +57,14 @@
                 Administrador
               </p>
             {% endif %}
+            {% if user.is_authenticated and user.is_staff == 0 %}
             <h5>
               Dirección
             </h5>
             <p id="direcUsuario" name="direcUsuario">
               {{ direcUser.direccion }}
             </p>
+            {% endif %}
             <h5>
               Número
               Telefónico
