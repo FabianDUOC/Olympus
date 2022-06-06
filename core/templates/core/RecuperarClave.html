@@ -36,7 +36,8 @@
   <!--Formulario-->
   <div class="container py-3 mb-5">
     <div class="row py-5">
-      <form class="col-md-9 m-auto" role="form" action="" method="post" id="formRecupClave">
+      <form class="col-md-9 m-auto" role="form" action="{% url 'core:msjClave' %}" method="post" id="formRecupClave">
+        {% csrf_token %} 
         <div class="mb-3">
           <label for="correo1">Correo Electrónico</label>
           <input type="email" required class="form-control mt-1" name="correo1" id="correo1"

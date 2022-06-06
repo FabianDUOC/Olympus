@@ -166,7 +166,7 @@ def eliminarProducto(request, id):
 def msjFooter(request):
 
     asunto = 'Suscripcion Realizada'
-    mensaje = 'Usted se ha suscrito correctamente, Pronto le llegaran las nuevas ofertas'
+    mensaje = 'Usted se ha suscrito correctamente, Pronto le llegaran las nuevas ofertas.'
     emisor =settings.EMAIL_HOST_USER
     rec = request.POST['emailF']
     receptor = [rec]
@@ -261,6 +261,19 @@ class editarCuentaFormView(TemplateView):
 
 def cuenta(request):
     return render(request,'core/cuenta.html')
+
+def msjClave(request):
+
+    asunto = 'Solicitud Contraseña'
+    mensaje = 'Su solicitud ha sido recibida, pronto recibira su contraseña.'
+    emisor =settings.EMAIL_HOST_USER
+    rec = request.POST['correo1']
+    receptor = [rec]
+    send_mail(asunto, mensaje, emisor, receptor)
+    messages.success(request,'Correo Enviado')
+    
+   
+    return redirect('core:index')
 
 @method_decorator(csrf_exempt, name='dispatch')
 class cuentaView(TemplateView):
