@@ -1,0 +1,26 @@
+---------------------------------------------------------------------
+-- CONEXION SQL PLUS
+---------------------------------------------------------------------
+CONN /AS SYSDBA
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+create user olympus identified by 123456789;
+grant connect, resource to olympus;
+alter user olympus default tablespace users quota unlimited on users;
+
+
+---------------------------------------------------------------------
+-- EN CMD
+---------------------------------------------------------------------
+pip install django
+pip install cx_oracle
+python -m pip install Pillow
+
+
+---------------------------------------------------------------------
+- EN Visual Studio Code
+---------------------------------------------------------------------
+python manage.py makemigrations
+python manage.py migrate
+
+-- SUPERUSUARIO
+python manage.py createsuperuser
