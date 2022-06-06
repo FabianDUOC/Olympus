@@ -43,7 +43,9 @@ def signup_view(request):
 
         try:
             valid = UserProfile.objects.get(email = email)
-
+        except:
+            valid = NULL
+        try:
             if valid is not NULL:
                 messages.warning(request, 'correo ya registrado') 
                 return redirect('core:registro')
