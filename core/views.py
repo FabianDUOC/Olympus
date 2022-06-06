@@ -177,6 +177,7 @@ def msjFooter(request):
    
     return redirect(pagAnt)
 
+
 def editarUsuario(request, id):
     nombre = request.POST['nombre']
     apellidoPa = request.POST['apellidoPa']

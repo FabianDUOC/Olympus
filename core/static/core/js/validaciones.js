@@ -70,7 +70,7 @@ $(document).ready(function () {
         } if (!/[A-Z]/.test(claveNu1)) {
             msj += "La contraseña nueva de tener al menos 1 mayúscula <br>";
             entrar = true;
-        } if (/[0-9]/.test(claveNu1)) {
+        } if (!/[0-9]/.test(claveNu1)) {
             msj += "La contraseña nueva de tener al menos 1 número <br>";
             entrar = true;
         } if (/[ ]/.test(claveNu1)) {
