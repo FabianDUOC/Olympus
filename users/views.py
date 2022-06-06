@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
@@ -39,26 +40,35 @@ def signup_view(request):
         password = signup_form.cleaned_data.get('password')
         direccion = request.POST['direccion']
         comuna = request.POST['comuna']
+
         try:
-            user = get_user_model().objects.create(
-                email=email,
-                nombre=nombre,
-                apellidoPa=apellidoPa,
-                apellidoMa=apellidoMa,
-                telefono=telefono,
-                password=make_password(password),
-                is_active=True
-            )
-            idUser = UserProfile.objects.latest('id')
-            comuna2 = Comuna.objects.get(nombre = comuna)
-            Direccion.objects.create(nombre = direccion, comuna=comuna2,idUsuario=idUser.id,email=email)
-            login(request, user)
-            messages.success(request, 'Cuenta registrada')
-            return redirect('core:cuenta')
+            valid = UserProfile.objects.get(email = email)
+
+            if valid is not NULL:
+                messages.warning(request, 'correo ya registrado') 
+                return redirect('core:registro')
+            else:
+
+                user = get_user_model().objects.create(
+                    email=email,
+                    nombre=nombre,
+                    apellidoPa=apellidoPa,
+                    apellidoMa=apellidoMa,
+                    telefono=telefono,
+                    password=make_password(password),
+                    is_active=True
+                )
+                idUser = UserProfile.objects.latest('id')
+                comuna2 = Comuna.objects.get(nombre = comuna)
+                Direccion.objects.create(nombre = direccion, comuna=comuna2,idUsuario=idUser.id,email=email)
+                login(request, user)
+                messages.success(request, 'Cuenta registrada')
+                return redirect('core:cuenta')
 
         except Exception as e:
             print(e)
-            return JsonResponse({'detail': f'{e}'})
+            messages.warning(request, 'Ha ocurrido un error')
+            return redirect('core:registro')
 
 
 def logout_view(request):
