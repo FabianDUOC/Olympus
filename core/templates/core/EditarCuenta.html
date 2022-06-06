@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <script src="https://kit.fontawesome.com/35863c2e47.js" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'core/img/logo.png' %}">
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -33,18 +33,20 @@
     ======================================================================================================= -->
 
     <div class="container">
-        <form action="{% url 'core:editarUsuario' user.id %}" method="post" id="editCuenta">
-        {% csrf_token %}
+        <form action="{% url 'core:editarUsuario' user.id %}" method="post" id="editCuenta" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 col-sm-12 mt-3 mb-3">
-                    <label>
-                        Foto de Perfil
-                    </label>
-                    <div class="ratio ratio-1x1">
-                        <img src={{ user.foto.url }} class="img-thumbnail" id="foto" alt="...">
+                    <div class="form-group">
+                        <label>
+                            Foto de Perfil
+                        </label>
+                        <div class="ratio ratio-1x1">
+                            <img src="{{ user.foto.url }}" class="img-thumbnail" id="foto" alt="...">
+                        </div>
+                        <!-- Botón elegir imagen -->
+                        <input type="file" name="fotoInput" id="fotoInput" accept=".jpg,.png" />
                     </div>
-                    <!-- Botón elegir imagen -->
-                    <input type="file" name="Foto" id="fotoInput" accept=".jpg,.png" />
                 </div>
 
                 <!-- Formulario -->
@@ -53,33 +55,38 @@
 
                         <div class="mb-3 form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control mt-1 mb-2" name="nombre" id="nombre" placeholder="Ingresar Nombre" value="{{ user.nombre }}" required>
+                            <input type="text" class="form-control mt-1 mb-2" name="nombre" id="nombre"
+                                placeholder="Ingresar Nombre" value="{{ user.nombre }}" required>
                             <p class="msjAlerta" id="msjNom"></p>
                         </div>
 
                         <div class="mb-3 form-group">
                             <label for="apellidoPa">Primer Apellido</label>
-                            <input type="text" class="form-control mt-1 mb-2" name="apellidoPa" id="apellidoPa" placeholder="Ingresar Primer Apellido" value="{{ user.apellidoPa }}" required>
+                            <input type="text" class="form-control mt-1 mb-2" name="apellidoPa" id="apellidoPa"
+                                placeholder="Ingresar Primer Apellido" value="{{ user.apellidoPa }}" required>
                             <p class="msjAlerta" id="msjApellidoPa"></p>
                         </div>
-                        
+
                         <div class="mb-3 form-group">
                             <label for="apellidoMa">Segundo Apellido</label>
-                            <input type="text" class="form-control mt-1 mb-2" name="apellidoMa" id="apellidoMa"placeholder="Ingresar Segundo Apellido" value="{{ user.apellidoMa }}" required>
+                            <input type="text" class="form-control mt-1 mb-2" name="apellidoMa" id="apellidoMa"
+                                placeholder="Ingresar Segundo Apellido" value="{{ user.apellidoMa }}" required>
                             <p class="msjAlerta" id="msjApellidoMa"></p>
                         </div>
 
                         <div class="mb-3 form-group">
                             <label for="email">Correo Electrónico</label>
-                            <input disabled type="text" class="form-control mt-1 mb-2" name="email" id="email" placeholder="Ingresar Correo Electrónico" value="{{ user.email }}">
+                            <input disabled type="text" class="form-control mt-1 mb-2" name="email" id="email"
+                                placeholder="Ingresar Correo Electrónico" value="{{ user.email }}">
                         </div>
 
                         <div class="mb-3 form-group">
                             <label for="direccion">Dirección</label>
-                            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion" placeholder="Ingresar Dirección" value="" required>
+                            <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion"
+                                placeholder="Ingresar Dirección" value="" required>
                             <p class="msjAlerta" id="msjDireccion"></p>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <label for="region">Región</label>
@@ -115,11 +122,12 @@
 
                         <div class="mb-3 form-group">
                             <label>Número Telefónico</label>
-                            <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono" placeholder="Ingresar Número Telefónico" value="{{ user.telefono }}" required>
+                            <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono"
+                                placeholder="Ingresar Número Telefónico" value="{{ user.telefono }}" required>
                             <p class="msjAlerta" id="msjTel"></p>
                             <p class="msjAlerta" id="msj"></p>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary mb-2">Guardar Cambios</button>
                         <a href="{% url 'core:cambiarClave' %}" class="btn btn-danger">Cambiar Contraseña</a>
                     </div>
@@ -130,63 +138,63 @@
     </div>
     <!-- Script para combobox anidado de comunas -->
     <script>
-        $(function() {
-        var email = $('#email').val();
-        
-        $.ajax({
-            url: window.location.pathname,
-            type: 'POST',
-            data: {
-            'action': 'buscar_direccion',
-            'email': email
-            },
-            dataType: 'json',
-            }).done(function(data){
-            if (!data.hasOwnProperty('error')) {
-                $('#direccion').attr('value',data.direccionU)
-                $('#region').val(data.regionU)         
-            }
-            message_error(data.error);
-            }).fail(function(jqXHR, textStatus, errorThrown){
-            }).always(function(data) {
-            select_comunas.html(options);
-            });
-        });
+        $(function () {
+            var email = $('#email').val();
 
-        $(function(){
-        $('select[name="region"]').on('change',function(){
-            var id = $(this).val();
-            var select_comunas = $('select[name="comuna"]');
-            var options =  '<option values="">---------</option>';
             $.ajax({
-            url: window.location.pathname,
-            type: 'POST',
-            data: {
-                'action': 'buscar_comuna_id',
-                'id': id
-            },
-            dataType: 'json',
-            }).done(function(data){
-            console.log(data);
-            if (!data.hasOwnProperty('error')) {
-                $.each(data,function(key, value){
-                options+='<option values="'+ value.id +'">'+ value.nombre +'</option>';
-                });
-                return false;
-            }
-            message_error(data.error);
-            }).fail(function(jqXHR, textStatus, errorThrown){
-            }).always(function(data) {
-            select_comunas.html(options);
+                url: window.location.pathname,
+                type: 'POST',
+                data: {
+                    'action': 'buscar_direccion',
+                    'email': email
+                },
+                dataType: 'json',
+            }).done(function (data) {
+                if (!data.hasOwnProperty('error')) {
+                    $('#direccion').attr('value', data.direccionU)
+                    $('#region').val(data.regionU)
+                }
+                message_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+            }).always(function (data) {
+                select_comunas.html(options);
             });
         });
+
+        $(function () {
+            $('select[name="region"]').on('change', function () {
+                var id = $(this).val();
+                var select_comunas = $('select[name="comuna"]');
+                var options = '<option values="">---------</option>';
+                $.ajax({
+                    url: window.location.pathname,
+                    type: 'POST',
+                    data: {
+                        'action': 'buscar_comuna_id',
+                        'id': id
+                    },
+                    dataType: 'json',
+                }).done(function (data) {
+                    console.log(data);
+                    if (!data.hasOwnProperty('error')) {
+                        $.each(data, function (key, value) {
+                            options += '<option values="' + value.id + '">' + value.nombre + '</option>';
+                        });
+                        return false;
+                    }
+                    message_error(data.error);
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                }).always(function (data) {
+                    select_comunas.html(options);
+                });
+            });
         });
 
-    </script>  
-        
-    
+    </script>
+
+
     {% include 'core/footer.html' %}
-        <script src="{% static 'core/js/Varios.js' %}"></script>
+    <script src="{% static 'core/js/Varios.js' %}"></script>
 </body>
 
 </html>

@@ -188,37 +188,23 @@ def editarUsuario(request, id):
 
     try:
         usuario = UserProfile.objects.get(id = id)
-    
         usuario.nombre = nombre
         usuario.apellidoPa = apellidoPa
         usuario.apellidoMa = apellidoMa
         usuario.direccion = direccion
         usuario.telefono = telefono
         foto = request.FILES['fotoInput']
-        print("*********")
-        print(foto)
         usuario.foto = foto
 
     except:
         foto = "No hay cambio"
-
     #update de los campos de usuario     
     usuario.save()
 
     try:
         direccionUsuario = Direccion.objects.get(idUsuario = id)
-        print(direccionUsuario)
-        print(type(direccionUsuario))
-        print(direccionUsuario.nombre)
-        print(direccionUsuario.idUsuario)
-        print(direccionUsuario.email)
-        print(direccionUsuario.comuna)
         comuna1 = Comuna.objects.get(nombre = comuna)
-        print(comuna1)
-        print(type(comuna1))
         comuna2 =comuna1.idComuna
-        print(comuna2)
-        print(type(comuna2))
         direccionUsuario.nombre = direc
         direccionUsuario.comuna = comuna1
     except:

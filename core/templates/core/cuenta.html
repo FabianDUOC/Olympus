@@ -32,7 +32,10 @@
         <h5>
           Foto de Perfil
         </h5>
-        <img src={{ user.foto.url }} class= "img-thumbnail" alt="...">
+        <div class="ratio ratio-1x1">
+          <img src="{{ user.foto.url }}" class= "img-thumbnail" alt="...">
+        </div>
+        
       </div>
       <div class="col-md-6 col-sm-12 mt-3 mb-3">
         <div class="row px-3">

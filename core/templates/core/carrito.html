@@ -80,12 +80,6 @@
             <a href="{% url 'carrito:limpiar_carrito' %}" class="btn btn-sm btn-primary">Limpiar Carrito</a>
           </div>
         </div>
-        <div class="card mb-4">
-          <div class="card-body">
-            <p><strong>Tiempo Estimado de Entrega</strong></p>
-            <p class="mb-0">12/10/2022 - 14/10/2022</p>
-          </div>
-        </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body">
             <p><strong>Metodos de Pago</strong></p>
@@ -128,9 +122,9 @@
                 </div>
                 <span><strong>
                   {% if total_carrito > 30000 %}
-                    {{total_carrito}}
+                    ${{total_carrito}}
                   {% else %}
-                    {{total_carrito|add:"5000"}} 
+                    ${{total_carrito|add:"5000"}} 
                   {% endif %}</strong></span>
               </li>
             </ul>
