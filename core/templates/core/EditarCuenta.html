@@ -74,6 +74,7 @@
                             <input disabled type="text" class="form-control mt-1 mb-2" name="email" id="email" placeholder="Ingresar Correo Electrónico" value="{{ user.email }}">
                         </div>
 
+                        {% if user.is_authenticated and user.is_staff == 0 %}
                         <div class="mb-3 form-group">
                             <label for="direccion">Dirección</label>
                             <input type="text" class="form-control mt-1 mb-2" name="direccion" id="direccion" placeholder="Ingresar Dirección" value="" required>
@@ -112,7 +113,7 @@
                                 <p class="msjAlerta" id="msjComuna"></p>
                             </div>
                         </div>
-
+                        {% endif %}
                         <div class="mb-3 form-group">
                             <label>Número Telefónico</label>
                             <input type="number" class="form-control mt-1 mb-2" name="telefono" id="telefono" placeholder="Ingresar Número Telefónico" value="{{ user.telefono }}" required>
