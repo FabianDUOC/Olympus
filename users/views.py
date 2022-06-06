@@ -21,7 +21,7 @@ def login_view(request):
             messages.success(request, 'Has iniciado sesión correctamente')
             return redirect('core:index')
         else:
-            messages.warning(request, 'Correo Electrónico o Contrasena inválida')
+            messages.warning(request, 'Correo Electrónico o Contraseña inválida')
             return redirect('core:iniciarSesion')
 
     messages.error(request, 'Formulario Inválido')

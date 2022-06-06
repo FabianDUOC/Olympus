@@ -49,8 +49,14 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'core:contacto' %}">CONTACTO</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:carrito' %}">CARRITO</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              CARRITO
+            </a>
+            <ul class="dropdown-menu">
+              <li>{% include "core/widget.html" %}</li>
+              <li><a class="mx-5 btn btn-primary" href="{% url 'core:carrito' %}">Ver Carrito</a></li>
+            </ul>
           </li>
           {% if user.is_authenticated and user.is_staff == 1 %}
             <li class="nav-item">
@@ -78,9 +84,8 @@
     </nav>
   </div>
 
-  {% if messages %}
-  {% for m in messages %}
-  
+{% for m in messages %}
+  {% if 'success' in m.tags %}
   <script>
     Swal.fire({
       icon: 'success',
@@ -89,8 +94,17 @@
       timer: 2000
     })
   </script>
-  {% endfor %}
+  {% else %}
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: '{{m}}',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  </script>
   {% endif %}
+{% endfor %}
 
 </body>
 

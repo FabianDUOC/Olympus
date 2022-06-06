@@ -58,10 +58,10 @@
                     ${{value.precio}}
                   </td>
                   <td>
-                    <a href="{% url 'carrito:agregar_producto' value.idProducto %}" class="btn btn-sm btn-success">+</a>
+                    <a href="{% url 'carrito:añadir_producto' value.idProducto %}" class="btn btn-sm btn-primary">+</a>
                     <a href="{% url 'carrito:restar_producto' value.idProducto %}"
-                      class="btn btn-sm btn-success">-</a><br />
-                    <a href="{% url 'carrito:eliminar_producto' value.idProducto %}" class="btn btn-sm btn-success">Eliminar Producto</a>
+                      class="btn btn-sm btn-primary">-</a><br />
+                    <a href="{% url 'carrito:eliminar_producto' value.idProducto %}" class="btn btn-sm btn-primary m-3">Eliminar Producto</a>
                   </td>
                 </tr>
                 {% endfor %}
@@ -76,7 +76,7 @@
                 {% endif %}
               </tbody>
             </table>
-            <a href="{% url 'carrito:limpiar_carrito' %}" class="btn btn-sm btn-success">Limpiar Carrito</a>
+            <a href="{% url 'carrito:limpiar_carrito' %}" class="btn btn-sm btn-primary">Limpiar Carrito</a>
           </div>
         </div>
         <div class="card mb-4">

@@ -2,8 +2,17 @@ from django.shortcuts import render
 from .carrito import Carrito
 from core.models import Producto
 from django.shortcuts import redirect
+from django.contrib import messages
 # Create your views here.
 def agregar_producto(request, idProducto):
+    carrito=Carrito(request)
+
+    producto=Producto.objects.get(idProducto=idProducto)
+    carrito.agregarProducto(producto=producto)
+    messages.success(request, 'Producto Agregado al carrito')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+def añadir_producto(request, idProducto):
     carrito=Carrito(request)
 
     producto=Producto.objects.get(idProducto=idProducto)
@@ -27,5 +36,6 @@ def restar_producto(request, idProducto):
 def limpiar_carrito(request):
     carrito=Carrito(request)
     carrito.limpiar_carrito()
+    messages.success(request, 'Carrito Vaciado')
     return redirect(request.META.get('HTTP_REFERER'))
     
