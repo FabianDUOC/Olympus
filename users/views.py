@@ -53,6 +53,7 @@ def signup_view(request):
             comuna2 = Comuna.objects.get(nombre = comuna)
             Direccion.objects.create(nombre = direccion, comuna=comuna2,idUsuario=idUser.id,email=email)
             login(request, user)
+            messages.success(request, 'Cuenta registrada')
             return redirect('core:cuenta')
 
         except Exception as e:
