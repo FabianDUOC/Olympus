@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('core.urls', namespace='core')),
     path('', include('users.urls', namespace='users')),
     path('', include('carrito.urls', namespace='carrito')),
+    path('api/', include('api_rest.urls')),
 ]
 
 if settings.DEBUG:
