@@ -19,12 +19,12 @@ def login(request):
         email1 = get_user_model().objects.get(email = correo)
 
     except :
-        return Response("Correo Incorrecto")
+        return Response("Datos Invalidos")
 
     pass_valida = check_password(clave, email1.password)
 
     if not pass_valida:
-        return Response("Contraseña Incorrecta")
+        return Response("Datos Invalidos")
     
     token, created = Token.objects.get_or_create(user = email1)
     return Response(token.key)
