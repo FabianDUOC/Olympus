@@ -16,10 +16,9 @@ def agregar_producto_varios(request, idProducto):
     numero = request.POST['formCantidad']
     numero = int(numero)
     
-    for i in range(numero):
-        carrito=Carrito(request)
-        producto=Producto.objects.get(idProducto=idProducto)
-        carrito.agregarProducto(producto=producto)
+    carrito=Carrito(request)
+    producto=Producto.objects.get(idProducto=idProducto)
+    carrito.agregarProductoVarios(producto=producto, numero=numero)
     
     messages.success(request, 'Producto Agregado al carrito')
     return redirect(request.META.get('HTTP_REFERER'))
