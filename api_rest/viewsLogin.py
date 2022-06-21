@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 
@@ -13,17 +13,18 @@ from rest_framework.authtoken.models import Token
 def login(request):
     data = JSONParser().parse(request)
 
-    usuario = data['username']
+    correo = data['email']
     clave = data['password']
     try:
-        user1 = User.objects.get(username = usuario)
-    except User.DoesNotExist:
-        return Response("Usuario Incorrecto")
+        email1 = get_user_model().objects.get(email = correo)
 
-    pass_valida = check_password(clave, user1.password)
+    except :
+        return Response("Correo Incorrecto")
+
+    pass_valida = check_password(clave, email1.password)
 
     if not pass_valida:
         return Response("Contraseña Incorrecta")
     
-    token, created = Token.objects.get_or_create(user = user1)
+    token, created = Token.objects.get_or_create(user = email1)
     return Response(token.key)
