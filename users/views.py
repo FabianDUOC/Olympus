@@ -35,7 +35,6 @@ def signup_view(request):
         email = signup_form.cleaned_data.get('email')
         nombre = signup_form.cleaned_data.get('nombre')
         apellidoPa = signup_form.cleaned_data.get('apellidoPa')
-        apellidoMa = signup_form.cleaned_data.get('apellidoMa')
         telefono = signup_form.cleaned_data.get('telefono')
         password = signup_form.cleaned_data.get('password')
         direccion = request.POST['direccion']
@@ -55,7 +54,6 @@ def signup_view(request):
                     email=email,
                     nombre=nombre,
                     apellidoPa=apellidoPa,
-                    apellidoMa=apellidoMa,
                     telefono=telefono,
                     password=make_password(password),
                     is_active=True

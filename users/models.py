@@ -1,6 +1,3 @@
-import random
-import string
-
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
@@ -16,6 +13,7 @@ class Region(models.Model):
     def __str__(self):
         return self.nombre
 
+
 class Comuna(models.Model):
     idComuna = models.AutoField(primary_key=True,verbose_name="Código de la Comuna")
     nombre = models.CharField(max_length=50, verbose_name="Nombre de la Comuna",null=False, blank=False)
@@ -23,6 +21,7 @@ class Comuna(models.Model):
 
     def __str__(self):
         return self.nombre
+
 
 class Direccion(models.Model):
     idDireccion = models.AutoField(primary_key=True,verbose_name="Código de la Dirección")
@@ -35,24 +34,20 @@ class Direccion(models.Model):
         return self.nombre
 
 
-def rand_slug():
-    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
-
-
 class CustomAccountManager(BaseUserManager):
-    def create_user(self, email, nombre, apellidoPa, apellidoMa, telefono, password, **other_fields):
+    def create_user(self, email, nombre, apellidoPa, telefono, password, **other_fields):
 
         if not email:
             raise ValueError(_('Debe ingresar un correo'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, nombre=nombre,
-                          apellidoPa=apellidoPa, apellidoMa=apellidoMa, telefono=telefono, **other_fields)
+                          apellidoPa=apellidoPa, telefono=telefono, **other_fields)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, nombre, apellidoPa, apellidoMa, telefono, password, **other_fields):
+    def create_superuser(self, email, nombre, apellidoPa, telefono, password, **other_fields):
 
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -65,14 +60,13 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(
                 'Superuser must be assigned to is_superuser=True.')
 
-        return self.create_user(email, nombre, apellidoPa, apellidoMa, telefono, password, **other_fields)
+        return self.create_user(email, nombre, apellidoPa, telefono, password, **other_fields)
 
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     nombre = models.CharField(max_length=100)
     apellidoPa = models.CharField(max_length=100)
-    apellidoMa = models.CharField(max_length=100)
     telefono = models.IntegerField()
 
     foto = models.ImageField(upload_to='users/', default='users/default.png', verbose_name="foto de perfil")
@@ -83,10 +77,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellidoPa','apellidoMa','telefono']
+    REQUIRED_FIELDS = ['nombre', 'apellidoPa', 'telefono']
 
     def __str__(self):
         return f'{self.nombre} {self.apellidoPa}'
-
-    def get_absolute_url(self):
-        return reverse('users:user_detail', args=[self.slug])

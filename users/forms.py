@@ -3,6 +3,7 @@ from users.models import Comuna, Region
 
 
 class UserLoginForm(forms.Form):
+    # Campos del Formulario
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
@@ -13,7 +14,6 @@ class UserLoginForm(forms.Form):
             }
         )
     )
-
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'id': 'loginPassword',
@@ -34,9 +34,7 @@ class UserSignUpForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Ingresar Correo Electrónico'
             }
-        )
-    )
-
+        ))
     nombre = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
@@ -47,7 +45,6 @@ class UserSignUpForm(forms.Form):
                 'placeholder': 'Ingresar Nombre'
             }
         ))
-
     apellidoPa = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
@@ -57,19 +54,7 @@ class UserSignUpForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Ingresar Primer Apellido'
             }
-        ))
-    
-    apellidoMa = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={
-                'id': 'apellidoMa',
-                'type': 'text',
-                'class': 'form-control',
-                'placeholder': 'Ingresar Segundo Apellido'
-            }
-        ))
-
+        )) 
     telefono = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -79,7 +64,6 @@ class UserSignUpForm(forms.Form):
                 'placeholder': 'Ingresar Número de Teléfono'
             }
         ))
-
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -89,7 +73,6 @@ class UserSignUpForm(forms.Form):
                 'placeholder': 'Ingresar Contraseña'
             }
         ))
-
     password2 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -99,12 +82,12 @@ class UserSignUpForm(forms.Form):
                 'placeholder': 'Repetir Contraseña'
             }
         ))
-
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Las Contraseñas no coinciden')
         return cd['password2']
+
 
 class DirecForm(forms.Form):
     region = forms.ModelChoiceField( 
@@ -115,7 +98,6 @@ class DirecForm(forms.Form):
                 'class': 'form-select',
             }
         ))
-
     comuna = forms.ModelChoiceField( 
         queryset=Comuna.objects.none(),
         widget=forms.Select(
@@ -123,8 +105,7 @@ class DirecForm(forms.Form):
                 'id': 'comuna',
                 'class': 'form-select',
             }
-        ))
-    
+        ))   
     direccion = forms.CharField(
         max_length=100,
         widget=forms.TextInput(

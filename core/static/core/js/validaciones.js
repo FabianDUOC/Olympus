@@ -126,7 +126,6 @@ $(document).ready(function () {
 
         var nom = $("#nombre").val();
         var apellidoPa = $("#apellidoPa").val();
-        var apellidoMa = $("#apellidoMa").val();
         var email = $("#signupEmail").val();
         var direcc = $("#direccion").val();
         var region = $("#region").val();
@@ -140,7 +139,6 @@ $(document).ready(function () {
 
         $("#msjNom").html("");
         $("#msjApellidoPa").html("");
-        $("#msjApellidoMa").html("");
         $("#msjCorreo").html("")
         $("#msjDireccion").html("");
         $("#msjRegion").html("");
@@ -150,20 +148,11 @@ $(document).ready(function () {
 
         $("#msj").html("");
 
-        if (nom.trim().length > 30) {
+        if (nom.trim().length > 50) {
             $("#msjNom").html("El nombre no tiene la longitud válida");
             entrar = true;
-        } if (/[ ]/.test(apellidoPa)) {
-            $("#msjApellidoPa1").html("El apellido no debe tener espacios");
-            entrar = true;
-        } if (apellidoPa.trim().length > 30) {
+        } if (apellidoPa.trim().length > 100) {
             $("#msjApellidoPa2").html("El apellido no tiene la longitud válida");
-            entrar = true;
-        } if (/[ ]/.test(apellidoMa)) {
-            $("#msjApellidoMa1").html("El apellido no debe tener espacios");
-            entrar = true;
-        } if (apellidoMa.trim().length > 30) {
-            $("#msjApellidoMa2").html("El apellido no tiene la longitud válida");
             entrar = true;
         } if (email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
             $("#msjCorreo").html("El correo electrónico introducido no es válido")
@@ -212,7 +201,6 @@ $(document).ready(function () {
 
         var nom = $("#nombre").val();
         var apellidoPa = $("#apellidoPa").val();
-        var apellidoMa = $("#apellidoMa").val();
         var direcc = $("#direccion").val();
         var region = $("#region").val();
         var comuna = $("#comuna").val();
@@ -222,7 +210,6 @@ $(document).ready(function () {
 
         $("#msjNom").html("");
         $("#msjApellidoPa").html("");
-        $("#msjApellidoMa").html("");
         $("#msjDireccion").html("");
         $("#msjRegion").html("");
         $("#msjComuna").html("");
@@ -235,13 +222,8 @@ $(document).ready(function () {
             entrar = true;
         }
 
-        if (aapellidoPa.trim().length > 30) {
+        if (apellidoPa.trim().length > 30) {
             $("#msjApellidoPa").html("El apellido no tiene la longitud válida");
-            entrar = true;
-        }
-
-        if (apellidoMa.trim().length > 30) {
-            $("#msjApellidoMa").html("El apellido no tiene la longitud válida");
             entrar = true;
         }
 

@@ -181,14 +181,12 @@ def msjFooter(request):
 def editarUsuario(request, id):
     nombre = request.POST['nombre']
     apellidoPa = request.POST['apellidoPa']
-    apellidoMa = request.POST['apellidoMa']
     telefono = request.POST['telefono']
 
     try:
         usuario = UserProfile.objects.get(id = id)
         usuario.nombre = nombre
         usuario.apellidoPa = apellidoPa
-        usuario.apellidoMa = apellidoMa
         usuario.telefono = telefono
 
         foto = request.FILES['fotoInput']
