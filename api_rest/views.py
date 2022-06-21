@@ -36,12 +36,12 @@ def controlP(request,idP):
         return Response(status = status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
-        serializer = Producto(p)
+        serializer = ProductoSerializer(p)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
         data2 = JSONParser().parse(request)
-        serializer = Producto(p,data = data2)
+        serializer = ProductoSerializer(p,data = data2)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
