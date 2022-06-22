@@ -14,3 +14,4 @@ drop table "OLYMPUS"."USERS_REGION" cascade constraints PURGE;
 drop table "OLYMPUS"."USERS_USERPROFILE" cascade constraints PURGE;
 drop table "OLYMPUS"."USERS_USERPROFILE_GROUPS" cascade constraints PURGE;
 drop table "OLYMPUS"."USERS_USERPROFILE_USER_PER709B" cascade constraints PURGE;
+drop table "OLYMPUS"."AUTHTOKEN_TOKEN" cascade constraints PURGE;
