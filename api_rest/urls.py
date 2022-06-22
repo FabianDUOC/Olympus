@@ -12,15 +12,15 @@ urlpatterns = [
 
     path('listaCategorias/',listaCategorias,name="listaCategorias"),
     path('agregarCategoria/',agregarCategoria,name="agregarCategoria"),
-    path('controlCategoria/',controlCategoria,name="controlCategoria"),
+    path('controlCategoria/<idC>/',controlCategoria,name="controlCategoria"),
 
     path('listaRegiones/',listaRegiones,name="listaRegiones"),
     path('agregarRegion/',agregarRegion,name="agregarRegion"),
-    path('controlRegion/',controlRegion,name="controlRegion"),
+    path('controlRegion/<idR>/',controlRegion,name="controlRegion"),
 
     path('listaComunas/',listaComunas,name="listaComunas"),
     path('agregarComuna/',agregarComuna,name="agregarComuna"),
-    path('controlComuna/',controlComuna,name="controlComuna"),
+    path('controlComuna/<idC>/',controlComuna,name="controlComuna"),
 
     path('login/',login,name="login"),
 ]

@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Region(models.Model):
-    idRegion = models.AutoField(primary_key=True,verbose_name="Código de la Región")
+    idRegion = models.IntegerField(primary_key=True,verbose_name="Código de la Región")
     nombre = models.CharField(max_length=50, verbose_name="Nombre de la Región",null=False, blank=False)
 
     def __str__(self):
@@ -15,7 +15,7 @@ class Region(models.Model):
 
 
 class Comuna(models.Model):
-    idComuna = models.AutoField(primary_key=True,verbose_name="Código de la Comuna")
+    idComuna = models.IntegerField(primary_key=True,verbose_name="Código de la Comuna")
     nombre = models.CharField(max_length=50, verbose_name="Nombre de la Comuna",null=False, blank=False)
     region = models.ForeignKey(Region,on_delete= models.CASCADE, verbose_name="Region de pertenencia")
 

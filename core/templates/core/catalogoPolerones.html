@@ -8,10 +8,10 @@
     <div class="col">
       <div class="card h-100">
         <div class="text-center">
-          {% if c.foto %}
-            <a href="{% url 'core:producto' c.idProducto %}"><img src="{{ p.foto.url }}" class="card-img-top " alt="...">
+          {% if p.foto %}
+            <a href="{% url 'core:producto' p.idProducto %}"><img src="{{ p.foto.url }}" class="card-img-top " alt="...">
           {% else %}
-            <a href="{% url 'core:producto' c.idProducto %}"><img src="/media/core/default.png" class="card-img-top " alt="...">
+            <a href="{% url 'core:producto' p.idProducto %}"><img src="/media/core/default.png" class="card-img-top " alt="...">
           {% endif %}
             <div class="overlay">
               Click para ver producto

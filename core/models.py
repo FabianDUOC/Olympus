@@ -2,14 +2,14 @@ from django.db import models
 
 # Create your models here.
 class Categoria(models.Model):
-    idCategoria = models.AutoField(primary_key=True,verbose_name="Código de la Categoría")
+    idCategoria = models.IntegerField(primary_key=True,verbose_name="Código de la Categoría")
     nombreC = models.CharField(max_length=30, verbose_name="Nombre de la Categoría",null=False, blank=False)
 
     def __str__(self):
         return self.nombreC
 
 class Estatus(models.Model):
-    idEstatus = models.AutoField(primary_key=True,verbose_name="Código de la Categoría")
+    idEstatus = models.IntegerField(primary_key=True,verbose_name="Código de la Categoría")
     nombreE = models.CharField(max_length=30, verbose_name="Nombre del Estatus",null=False, blank=False)
 
     def __str__(self):
