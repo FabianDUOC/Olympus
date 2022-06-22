@@ -5,7 +5,7 @@ from users.models import Region, Comuna
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = ['idProducto','nombreProducto','descCorta','descLarga','precio','stock','foto','categoria','estatus']
+        fields = ['idProducto','nombreProducto','descCorta','descLarga','precio','stock','categoria','estatus']
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
