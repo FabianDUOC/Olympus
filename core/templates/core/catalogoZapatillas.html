@@ -8,8 +8,11 @@
     <div class="col">
       <div class="card h-100">
         <div class="text-center">
-          <a href="{% url 'core:producto' z.idProducto %}"><img src="{{ z.foto.url }}" class="card-img-top imgcatal"
-              alt="...">
+          {% if c.foto %}
+            <a href="{% url 'core:producto' c.idProducto %}"><img src="{{ p.foto.url }}" class="card-img-top " alt="...">
+          {% else %}
+            <a href="{% url 'core:producto' c.idProducto %}"><img src="/media/core/default.png" class="card-img-top " alt="...">
+          {% endif %}
             <div class="overlay">
               Click para ver producto
             </div>
@@ -26,7 +29,7 @@
           </div>
           {% else %}
             <a href="{% url 'carrito:agregar_producto' z.idProducto %}" class="btn btn-primary">Agregar al Carro</a>
-          {%  endif %}
+          {% endif %}
         </div>
       </div>
     </div>

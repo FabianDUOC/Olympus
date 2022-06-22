@@ -9,8 +9,11 @@
       {% block detalleProducto %}
       <div class="row">
         <div class="col-md-6 col-sm-12 mt-3 mb-3">
-          <div class="ratio ratio-1x1"><img src="{{ producto.foto.url }}" class="img-thumbnail" alt="..."></div>
-          
+          {% if producto.foto %}
+            <div class="ratio ratio-1x1"><img src="{{ producto.foto.url }}" class="img-thumbnail" alt="..."></div>
+          {% else %}
+            <div class="ratio ratio-1x1"><img src="/media/core/default.png" class="img-thumbnail" alt="..."></div>
+          {% endif %}
         </div>
         <div class="col-md-6 col-sm-12 mt-3 mb-3">
           <div class="row row px-3">

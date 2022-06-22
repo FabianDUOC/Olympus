@@ -31,7 +31,11 @@
                     <div class="form-group">
                         <label for="fotoP">Foto Producto: </label>
                         <div class="ratio ratio-1x1">
-                            <img src="{{ producto.foto.url }}" class="img-thumbnail" id="foto" alt="...">
+                            {% if producto.foto %}
+                                <img src="{{ producto.foto.url }}" class="img-thumbnail" id="foto" alt="...">
+                            {% else %}
+                                <img src="/media/core/default.png" class="img-thumbnail" id="foto" alt="...">
+                            {% endif %}
                         </div>
                         <input type="file" name="fotoInput" id="fotoInput" accept=".jpg,.png" />
                     </div>
