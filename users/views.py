@@ -14,7 +14,7 @@ from .forms import UserLoginForm, UserSignUpForm
 def login_view(request):
     login_form = UserLoginForm(request.POST or None)
     if login_form.is_valid():
-        email = login_form.cleaned_data.get('email')
+        email = login_form.cleaned_data.get('email').lower()
         password = login_form.cleaned_data.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
@@ -32,7 +32,7 @@ def login_view(request):
 def signup_view(request):
     signup_form = UserSignUpForm(request.POST or None)
     if signup_form.is_valid():
-        email = signup_form.cleaned_data.get('email')
+        email = signup_form.cleaned_data.get('email').lower()
         nombre = signup_form.cleaned_data.get('nombre')
         apellidoPa = signup_form.cleaned_data.get('apellidoPa')
         telefono = signup_form.cleaned_data.get('telefono')
