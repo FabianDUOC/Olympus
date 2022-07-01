@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.hashers import check_password
 
 from users.models import Comuna, Direccion, UserProfile
 
@@ -86,16 +87,23 @@ def profile_change_password(request, id):
     u = UserProfile.objects.get(id = id)
     claveActual = request.POST['claveActual']
     claveANu1 = request.POST['claveNueva1']
-    u.set_password(claveANu1)
-    u.save()
-    user = authenticate(request, email=u.email, password=claveANu1)
-    if user is not None:
-        login(request, user)
-        messages.success(request, 'Contraseña Actualizada')
-        return redirect('core:cuenta')
+
+    pass_valida = check_password(claveActual, u.password)
+
+    if not pass_valida:
+        messages.warning(request, 'Contraseña actual no valida')
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
-        messages.warning(request, 'Ha ocurrido un error')
-        return redirect('core:iniciarSesion')
+        u.password = (make_password(claveANu1))
+        u.save()
+        user = authenticate(request, email=u.email, password=claveANu1)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Contraseña Actualizada')
+            return redirect('core:cuenta')
+        else:
+            messages.warning(request, 'Ha ocurrido un error')
+            return redirect('core:iniciarSesion')
         
 
 
