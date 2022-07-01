@@ -52,7 +52,7 @@ class UserSignUpForm(forms.Form):
                 'id': 'apellidoPa',
                 'type': 'text',
                 'class': 'form-control',
-                'placeholder': 'Ingresar Primer Apellido'
+                'placeholder': 'Ingresar Apellido'
             }
         )) 
     telefono = forms.IntegerField(

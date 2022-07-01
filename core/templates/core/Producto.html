@@ -32,14 +32,28 @@
             <h5>
               Disponibilidad: {{ producto.stock }}
             </h5>
-            <b>Seleccionar Cantidad</b>
-            <form action="{% url 'carrito:agregar_producto_varios' producto.idProducto %}" method="POST">
-            {% csrf_token %} 
-            <div class="form-outline">
-            <input id="formCantidad" min="1" max="{{ producto.stock }}" name="formCantidad" value="1" type="number" class="form-control mb-3" />
-            </div>
-            <button type="submit" class="btn btn-primary ">Agregar al Carro</button>
-          </form>
+      
+            {% if user.is_authenticated and user.is_staff == 0 %}
+              <b>Seleccionar Cantidad</b>
+              <form action="{% url 'carrito:agregar_producto_varios' producto.idProducto %}" method="POST">
+              {% csrf_token %} 
+                <div class="form-outline">
+                  <input id="formCantidad" min="1" max="{{ producto.stock }}" name="formCantidad" value="1" type="number" class="form-control mb-3" />
+                </div>
+                <button type="submit" class="btn btn-primary ">Agregar al Carro</button>
+              </form>
+            {% elif user.is_authenticated and user.is_staff == 1 %}
+
+            {% else %}
+              <b>Seleccionar Cantidad</b>
+              <form action="" method="POST">
+              {% csrf_token %} 
+                <div class="form-outline">
+                  <input id="formCantidad" min="1" max="{{ producto.stock }}" name="formCantidad" value="1" type="number" class="form-control mb-3" />
+                </div>
+                  <a href="{% url 'core:requiereLogin' %}" class="btn btn-primary">Agregar al Carro</a>
+              </form>
+            {% endif %}
           </div>
         </div>
       </div>

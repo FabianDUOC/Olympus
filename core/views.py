@@ -294,3 +294,7 @@ class cuentaView(TemplateView):
         except:
             data['error'] = 'Ha ocurrido un error'
             return JsonResponse(data, safe=False)
+
+def requiereLogin(request):
+    messages.info(request,'Debe iniciar sesión')
+    return redirect(request.META.get('HTTP_REFERER'))

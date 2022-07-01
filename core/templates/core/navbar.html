@@ -96,6 +96,15 @@
       timer: 2000
     })
   </script>
+  {% elif 'info' in m.tags %}
+  <script>
+    Swal.fire({
+      icon: 'info',
+      title: 'Debe iniciar sesión',
+      confirmButtonText: 'Ok',
+      confirmButtonColor: '#0d6efd'
+    })
+  </script>
   {% else %}
   <script>
     Swal.fire({

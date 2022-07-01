@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import cuentaView, editarCuentaFormView, index, iniciarSesion, cambiarClave, recuperarClave, categoriaProducto, producto, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta, contacto, carrito, editarProducto, editarP, eliminarProducto, enviarCon, msjFooter, editarUsuario, registroFormView, msjClave
+from .views import cuentaView, editarCuentaFormView, index, iniciarSesion, cambiarClave, recuperarClave, categoriaProducto, producto, agregarProducto, registrarP, catalogoPoleras, catalogoPantalones, catalogoZapatillas, catalogoPolerones, catalogoChaquetas, cuenta, contacto, carrito, editarProducto, editarP, eliminarProducto, enviarCon, msjFooter, editarUsuario, registroFormView, msjClave, requiereLogin
 
 app_name = 'core'
 
@@ -30,4 +30,5 @@ urlpatterns = [
     path( 'enviarCon', enviarCon, name="enviarCon"),
     path( 'msjFooter', msjFooter, name="msjFooter"),
     path( 'msjClave', msjClave, name="msjClave"),
+    path( 'requiereLogin', requiereLogin, name="requiereLogin")
 ]
